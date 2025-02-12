@@ -76,9 +76,15 @@
 													?>
 												</select>
 											</div>
+											<?php
+											if(in_array($this->session->userdata('admin_group_id'), array(1,3,12))){
+											?>
 											<div class="col-sm-2">
 												<button style="background-color:#88b93c; border:1px solid black; border-radius:10px; line-height:15px; text-transform:capitalize;"><a href="<?php echo site_url('absensi/form_kategori_cuti'); ?>"><b style="color:white;"><i class="fa-solid fa-plus"></i> Tambah Tipe</b></a></button>
 											</div>
+											<?php
+											}
+											?>
 											<br />
 											<br />
 											<div class="col-sm-2">

@@ -144,11 +144,11 @@
             <?php echo $this->Templates->PageHeader();?>
             <div class="page-body">
                 <div id="about" class="container spacer about">
-                <div class="col-sm-12" style="background-image:linear-gradient(to right,#0B5394 0%,#23649e 51%,#0B5394 100%); font-size:18px; border-radius: 10px; padding:10px; margin-bottom:50px;">
+                <?php
+                if(in_array($this->session->userdata('admin_group_id'), array(1,2,3))){
+                ?>
+                    <div class="col-sm-12" style="background-image:linear-gradient(to right,#0B5394 0%,#23649e 51%,#0B5394 100%); font-size:18px; border-radius: 10px; padding:10px; margin-bottom:50px;">
                         <p style="text-align:center; font-weight:bold; color:white;">BUTUH PERSETUJUAN</p>
-                        <?php
-                        if(in_array($this->session->userdata('admin_group_id'), array(1,2,3))){
-                        ?>
                         <figure class="highcharts-figure">
                             <?php
                             if(in_array($this->session->userdata('admin_group_id'), array(1,3))){
@@ -182,10 +182,10 @@
                             }
                             ?>
                         </figure>
-                        <?php
-                        }
-                        ?>
                     </div>
+                    <?php
+                    }
+                    ?>
                     <div id="flippy_menu">
                         <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler_menu') .style.display=='none') {document.getElementById('spoiler_menu') .style.display=''}else{document.getElementById('spoiler_menu') .style.display='none'}"><i class="fa-regular fa-hand-point-right"></i> MENU (SHOW/HIDE)</button>
                     </div>
@@ -247,6 +247,13 @@
                             ?>
                             <table width="100%" style="margin-top:100px;">
                                 <tr>
+                                    <?php
+                                    if(in_array($this->session->userdata('admin_group_id'), array(2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22))){
+                                    ?>
+                                    <th width="25%"></th>
+                                    <?php
+                                    }
+                                    ?>
                                     <th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
                                         <ul class="row text-center list-inline  wowload bounceIn">
                                             <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
@@ -263,6 +270,17 @@
                                             </li>
                                         </ul>
                                     </th>
+                                    <?php
+                                    if(in_array($this->session->userdata('admin_group_id'), array(2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22))){
+                                    ?>
+                                    <th width="25%"></th>
+                                    <?php
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if(in_array($this->session->userdata('admin_group_id'), array(1))){
+                                    ?>
                                     <th width="25%" class="text-center" data-toggle="collapse" data-target="#settings" aria-expanded="false" aria-controls="beton">
                                         <ul class="row text-center list-inline  wowload bounceIn">
                                             <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
@@ -271,6 +289,9 @@
                                             </li>
                                         </ul>
                                     </th>
+                                    <?php
+                                    }
+                                    ?>
                                 </tr>                                    
                             </table>
                             <?php
