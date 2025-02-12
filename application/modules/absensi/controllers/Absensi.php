@@ -513,8 +513,6 @@ class Absensi extends Secure_Controller {
 		$this->db->where("nama_pegawai", $created_by);
 		$this->db->where("date", $date);
 		$this->db->update("absensi");
-		file_put_contents("D:\\test.txt", $this->db->last_query());
-
 
 		$this->session->set_flashdata('notif_success','<b>Pengajuan Absensi Telah Disetujui</b>');
 		redirect("admin/absensi");
