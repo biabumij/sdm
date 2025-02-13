@@ -692,7 +692,7 @@ html.right-sidebar-opened .right-sidebar {
 
   .page-header .leftside-header {
     position: fixed;
-    background: #e69500;
+    background: linear-gradient(90deg, #5486b4 20%, #23649e 40%, #333333 80%);
     left: 0;
     right: 0;
     top: 0;
