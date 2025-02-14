@@ -167,7 +167,7 @@
                             ?>
 
                             <?php
-                            if(in_array($this->session->userdata('admin_group_id'), array(1,4))){
+                            if(in_array($this->session->userdata('admin_group_id'), array(1,3))){
                             ?>
                             <?php
                             $query = $this->db->select('COUNT(id) as id')
@@ -243,7 +243,7 @@
                                 </tr>
                             </table>
                             <?php
-                            if(in_array($this->session->userdata('admin_group_id'), array(1,3,12))){
+                            if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                             ?>
                             <table width="100%" style="margin-top:100px;">
                                 <tr>

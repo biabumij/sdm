@@ -19,8 +19,9 @@ class Data_pegawai extends Secure_Controller {
 	{
 		$check = $this->m_admin->check_login();
 		if ($check == true) {
-			$data['jabatan'] = $this->db->order_by('admin_group_name', 'asc')->select('*')->get_where('tbl_admin_group')->result_array();
-			$data['departemen'] = $this->db->order_by('nama', 'asc')->select('*')->get_where('kategori_departemen')->result_array();
+			$data['position'] = $this->db->order_by('admin_group_name', 'asc')->select('*')->get_where('tbl_admin_group')->result_array();
+			$data['departement'] = $this->db->order_by('nama', 'asc')->select('*')->get_where('kategori_departemen')->result_array();
+			$data['location'] = $this->db->order_by('nama', 'asc')->select('*')->get_where('kategori_proyek')->result_array();
 			$this->load->view('data_pegawai/form_data_pegawai', $data);
 		} else {
 			redirect('admin');
@@ -62,6 +63,41 @@ class Data_pegawai extends Secure_Controller {
 		}
 	}
 
+	public function form_location()
+	{
+		$check = $this->m_admin->check_login();
+		if ($check == true) {
+			$data['location'] = $this->db->order_by('nama', 'asc')->select('*')->get_where('kategori_proyek')->result_array();
+			$this->load->view('data_pegawai/form_location', $data);
+		} else {
+			redirect('admin');
+		}
+	}
+
+	public function submit_location()
+	{
+		$nama = $this->input->post('nama');
+
+		$arr_insert = array(
+			'nama' => $nama,
+		);
+
+		$this->db->insert('kategori_proyek',$arr_insert);
+
+		if ($this->db->trans_status() === FALSE) {
+			# Something went wrong.
+			$this->db->trans_rollback();
+			$this->session->set_flashdata('notif_error','<b>Gagal Menambahkan Lokasi Kerja</b>');
+			redirect('data_pegawai/form_data_pegawai');
+		} else {
+			# Everything is Perfect. 
+			# Committing data to the database.
+			$this->db->trans_commit();
+			$this->session->set_flashdata('notif_success','<b>Berhasil Menambahkan Lokasi Kerja</b>');
+			redirect('data_pegawai/form_data_pegawai');
+		}
+	}
+
 	public function submit_data_pegawai()
 	{
 		$nip = $this->input->post('nip');
@@ -75,6 +111,7 @@ class Data_pegawai extends Secure_Controller {
 		$date_pkwt = date('Y-m-d',strtotime($this->input->post('date_pkwt')));
 		$place_birth = $this->input->post('place_birth');
 		$date_birth = date('Y-m-d',strtotime($this->input->post('date_birth')));
+		$religion = $this->input->post('religion');
 		$ptkp = $this->input->post('ptkp');
 		$ktp_address = $this->input->post('ktp_address');
 		$ktp = $this->input->post('ktp');
@@ -103,6 +140,7 @@ class Data_pegawai extends Secure_Controller {
 			'date_pkwt' => $date_pkwt,
 			'place_birth' => $place_birth,
 			'date_birth' => $date_birth,
+			'religion' => $religion,
 			'ptkp' => $ptkp,
 			'ktp_address' => $ktp_address,
 			'ktp' => $ktp,
@@ -234,8 +272,9 @@ class Data_pegawai extends Secure_Controller {
 		if ($check == true) {
 			$data['tes'] = '';
 			$data['row'] = $this->db->get_where("data_pegawai", ["id" => $id])->row_array();
-			$data['jabatan'] = $this->db->order_by('admin_group_name', 'asc')->select('*')->get_where('tbl_admin_group')->result_array();
-			$data['departemen'] = $this->db->order_by('nama', 'asc')->select('*')->get_where('kategori_departemen')->result_array();
+			$data['position'] = $this->db->order_by('admin_group_name', 'asc')->select('*')->get_where('tbl_admin_group')->result_array();
+			$data['departement'] = $this->db->order_by('nama', 'asc')->select('*')->get_where('kategori_departemen')->result_array();
+			$data['location'] = $this->db->order_by('nama', 'asc')->select('*')->get_where('kategori_proyek')->result_array();
 			$this->load->view('data_pegawai/sunting_data_pegawai', $data);
 		} else {
 			redirect('admin');
@@ -255,6 +294,7 @@ class Data_pegawai extends Secure_Controller {
 		$date_pkwt = date('Y-m-d',strtotime($this->input->post('date_pkwt')));
 		$place_birth = $this->input->post('place_birth');
 		$date_birth = date('Y-m-d',strtotime($this->input->post('date_birth')));
+		$religion = $this->input->post('religion');
 		$ptkp = $this->input->post('ptkp');
 		$ktp_address = $this->input->post('ktp_address');
 		$ktp = $this->input->post('ktp');
@@ -283,6 +323,7 @@ class Data_pegawai extends Secure_Controller {
 			'date_pkwt' => $date_pkwt,
 			'place_birth' => $place_birth,
 			'date_birth' => $date_birth,
+			'religion' => $religion,
 			'ptkp' => $ptkp,
 			'ktp_address' => $ktp_address,
 			'ktp' => $ktp,
@@ -364,6 +405,43 @@ class Data_pegawai extends Secure_Controller {
 			$this->session->set_flashdata('notif_success','<b>Berhasil Edit Data Pegawai</b>');
 			redirect('admin/data_pegawai');
 		}
+	}
+
+	public function cetak_data_pegawai()
+	{
+		$this->load->library('pdf');
+	
+		$pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->setPrintHeader(false);
+		$pdf->setPrintFooter(false);
+		$pdf->SetMargins(5, 5, 5);
+        $tagvs = array('div' => array(0 => array('h' => 0, 'n' => 0), 1 => array('h' => 0, 'n'=> 0)));
+		$pdf->setHtmlVSpace($tagvs);
+		$pdf->AddPage('L');
+
+		$arr_data = array();
+		$arr_date = $this->input->get('filter_date');
+		if(empty($arr_date)){
+			$filter_date = '-';
+		}else {
+			$arr_filter_date = explode(' - ', $arr_date);
+			$start_date = date('Y-m-d',strtotime($arr_filter_date[0]));
+			$end_date = date('Y-m-d',strtotime($arr_filter_date[1]));
+			$filter_date = date('d F Y',strtotime($arr_filter_date[0])).' - '.date('d F Y',strtotime($arr_filter_date[1]));
+		}
+		$this->db->order_by('name','asc');
+		$query = $this->db->get('data_pegawai');
+		$data['data'] = $query->result_array();
+
+		$data['filter_date'] = $filter_date;
+		$data['start_date'] = $start_date;
+		$data['end_date'] = $end_date;
+		$data['data'] = $query->result_array();
+        $html = $this->load->view('data_pegawai/cetak_data_pegawai',$data,TRUE);
+        
+		$pdf->SetTitle('');
+        $pdf->nsi_html($html);
+        $pdf->Output('data_pegawai'.'.pdf', 'I');
 	}
 
 	public function table_slip_gaji()

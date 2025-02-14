@@ -35,7 +35,7 @@ class Absensi extends Secure_Controller {
 			'nama_pegawai' => $created_by,
 			'date' => $date,
 			'clock_in' => $created_on,
-			'clock_out' => NULL,
+			'clock_out' =>  date('00:00:00'),
 			'status' => 'Hadir',
 		);
 
@@ -209,6 +209,7 @@ class Absensi extends Secure_Controller {
 		$data['start_date'] = $start_date;
 		$data['end_date'] = $end_date;
 		$data['data'] = $query->result_array();
+		file_put_contents("D:\\test.txt", $this->db->last_query());
         $html = $this->load->view('absensi/cetak_absensi',$data,TRUE);
         
 		$pdf->SetTitle('');

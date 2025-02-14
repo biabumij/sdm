@@ -102,8 +102,8 @@
 												<select class="form-control form-select2" name="position" required="" >
 													<option>Pilih Jabatan</option>
 													<?php
-													if(!empty($jabatan)){
-														foreach ($jabatan as $x) {
+													if(!empty($position)){
+														foreach ($position as $x) {
 															?>
 															<option value="<?php echo $x['admin_group_id'];?>"><?php echo $x['admin_group_name'];?></option>
 															<?php
@@ -124,8 +124,8 @@
 												<select class="form-control form-select2" name="departement" required="" >
 													<option>Pilih Departemen</option>
 													<?php
-													if(!empty($departemen)){
-														foreach ($departemen as $x) {
+													if(!empty($departement)){
+														foreach ($departement as $x) {
 															?>
 															<option value="<?php echo $x['id'];?>"><?php echo $x['nama'];?></option>
 															<?php
@@ -143,7 +143,21 @@
 												<label>Lokasi Tempat Kerja</label>
 											</div>
 											<div class="col-sm-2">
-												<input type="text" class="form-control" name="location" required="">
+												<select class="form-control form-select2" name="location" required="" >
+													<option>Pilih Lokasi Kerja</option>
+													<?php
+													if(!empty($location)){
+														foreach ($location as $x) {
+															?>
+															<option value="<?php echo $x['id'];?>"><?php echo $x['nama'];?></option>
+															<?php
+														}
+													}
+													?>
+												</select>
+											</div>
+											<div class="col-sm-2">
+												<button style="background-color:#88b93c; border:1px solid black; border-radius:10px; line-height:15px; text-transform:capitalize;"><a href="<?php echo site_url('data_pegawai/form_location'); ?>"><b style="color:white;"><i class="fa-solid fa-plus"></i> Tambah Lokasi Kerja</b></a></button>
 											</div>
 											<br />
 											<br />
@@ -176,6 +190,21 @@
 											</div>
 											<div class="col-sm-2">
 												<input type="date" class="form-control" name="date_birth" required="">
+											</div>
+											<br />
+											<br />
+											<div class="col-sm-2">
+												<label>Agama</label>
+											</div>
+											<div class="col-sm-2">
+												<select name="religion" class="form-control" required="">
+													<option>Pilih Agama</option>
+													<option value="Islam">Islam</option>
+													<option value="Katolik">Katolik</option>
+													<option value="Hindu">Hindu</option>
+													<option value="Budha">Budha</option>
+													<option value="Konghucu">Konghucu</option>
+												</select>
 											</div>
 											<br />
 											<br />

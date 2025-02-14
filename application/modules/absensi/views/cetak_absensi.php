@@ -93,7 +93,7 @@
 			<?php foreach ($data as $key => $x): ?>
 			<tr>
 				<td align="center"><?= $this->crud_global->GetField('tbl_admin',array('admin_id'=>$x['nama_pegawai']),'nip'); ?></td>
-				<td align="center"><?= $this->crud_global->GetField('tbl_admin',array('admin_id'=>$x['nama_pegawai']),'admin_name'); ?></td>
+				<td align="left"><?= $this->crud_global->GetField('tbl_admin',array('admin_id'=>$x['nama_pegawai']),'admin_name'); ?></td>
 				
 				<?php
 				$admin_id = $x['nama_pegawai'];
@@ -104,7 +104,7 @@
 				->get()->row_array();
 				$admin_group_id = $admin_group_id['admin_group_name'];
 				?>
-				<td align="center"><?php echo $admin_group_id;?></td>
+				<td align="left"><?php echo $admin_group_id;?></td>
 				<td align="center"><?= date('d F Y',strtotime($x['date'])); ?></td>
 				<td align="center"><?= $this->crud_global->GetField('tbl_admin',array('admin_id'=>$x['nama_pegawai']),'organisasi'); ?></td>
 				<td align="center"><?php echo $x['status'];?></td>
@@ -117,25 +117,31 @@
 
 				<?php
 				$clock_out = $x['clock_out'];
-				$styleColor = $clock_out < date('H:i',strtotime('17:00')) ? 'color:red' : 'color:black';
+				if($clock_out == '00:00:00'){
+					$clock_out = 'Belum Clock-Out';
+				}else {
+					$clock_out = date('H:i',strtotime($x['clock_out']));
+				}
+				
+				$styleColor = $clock_out < date('H:i',strtotime('16:59')) ? 'color:red' : 'color:black';
 				?>
-				<td align="center" style="<?php echo $styleColor ?>"><?= date('H:i',strtotime($clock_out)); ?></td>
+				<td align="center" style="<?php echo $styleColor ?>"><?php echo $clock_out;?></td>
 
-				<td align="center" style="<?php echo $styleColor ?>">
 				<?php
 				$waktustart = date('H:i',strtotime($clock_in));
-				$waktuend = date('H:i',strtotime($clock_out));
-
+				$clock_out_null = $x['clock_out'];
+				if($clock_out_null == '00:00:00'){
+					$clock_out_null = '00:00:00';
+				}else {
+					$clock_out_null = date('H:i',strtotime($x['clock_out']));
+				}
+				$waktuend = date('H:i',strtotime($clock_out_null));
 				$datetime1 = new DateTime($waktustart);
 				$datetime2 = new DateTime($waktuend);
 				$durasi = $datetime1->diff($datetime2);
-
-				$styleColor = $durasi < date('H:i',strtotime('08:00')) ? 'color:red' : 'color:black';
-
-				echo $durasi->format("%H:%I"), "\n";
-				
+				$styleColor = $durasi->format("%H:%I") < date('H:i',strtotime('09:00')) ? 'color:red' : 'color:black';
 				?>
-				</td>
+				<td align="center" style="<?php echo $styleColor ?>"><?php echo $durasi->format("%H:%I"), "\n";?></td>
 			</tr>
 			<?php endforeach; ?>
 		</table>

@@ -68,7 +68,7 @@
                                             </div>
                                             <div class="col-sm-2">
                                                 <select name="gender" class="form-control" required="">
-                                                     <option value="<?= $row['gender'] ?>"><?= $row['gender'] ?></option>
+                                                    <option value="<?= $row['gender'] ?>"><?= $row['gender'] ?></option>
                                                     <option value="Laki-Laki">Laki-Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
                                                 </select>
@@ -90,10 +90,10 @@
                                                 <select class="form-control form-select2" name="position" required="" >
                                                     <option>Pilih Jabatan</option>
                                                     <?php
-                                                    if (!empty($jabatan)) {
-                                                        foreach ($jabatan as $key => $x) {
+                                                    if(!empty($position)){
+                                                        foreach ($position as $key => $x) {
                                                             ?>
-                                                            <option value="<?= $x['admin_group_id']; ?>" <?= ($x['admin_group_id'] == $x['admin_group_id']) ? 'selected' : '' ?>><?= $x['admin_group_name']; ?></option>
+                                                            <option value="<?= $x['admin_group_id']; ?>" <?= ($x['admin_group_id'] == $row['position']) ? 'selected' : '' ?>><?= $x['admin_group_name']; ?></option>
                                                             <?php
                                                         }
                                                     }
@@ -111,12 +111,11 @@
                                             <div class="col-sm-2">
                                                 <select class="form-control form-select2" name="departement" required="" >
                                                     <option>Pilih Departemen</option>
-
                                                     <?php
-                                                    if (!empty($departemen)) {
-                                                        foreach ($departemen as $key => $x) {
+                                                    if(!empty($departement)){
+                                                        foreach ($departement as $key => $x) {
                                                             ?>
-                                                            <option value="<?= $x['id']; ?>" <?= ($x['id'] == $x['id']) ? 'selected' : '' ?>><?= $x['nama']; ?></option>
+                                                            <option value="<?= $x['id']; ?>" <?= ($x['id'] == $row['departement']) ? 'selected' : '' ?>><?= $x['nama']; ?></option>
                                                             <?php
                                                         }
                                                     }
@@ -132,8 +131,22 @@
                                                 <label>Lokasi Tempat Kerja</label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <input type="text" class="form-control" name="location" required="" value="<?= $row["location"]; ?>">
+                                                <select class="form-control form-select2" name="location" required="" >
+                                                    <option>Pilih Lokasi Kerja</option>
+                                                    <?php
+                                                    if(!empty($location)){
+                                                        foreach ($location as $key => $x) {
+                                                            ?>
+                                                            <option value="<?= $x['id']; ?>" <?= ($x['id'] == $row['location']) ? 'selected' : '' ?>><?= $x['nama']; ?></option>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
+                                            <div class="col-sm-2">
+												<button style="background-color:#88b93c; border:1px solid black; border-radius:10px; line-height:15px; text-transform:capitalize;"><a href="<?php echo site_url('data_pegawai/form_location'); ?>"><b style="color:white;"><i class="fa-solid fa-plus"></i> Tambah Lokasi Kerja</b></a></button>
+											</div>
                                             <br />
                                             <br />
                                             <div class="col-sm-2">
@@ -165,6 +178,21 @@
                                             </div>
                                             <div class="col-sm-2">
                                                 <input type="text" class="form-control dtpicker" name="date_birth" required="" value="<?= date('d-m-Y',strtotime($row["date_birth"])) ?>">
+                                            </div>
+                                            <br />
+                                            <br />
+                                            <div class="col-sm-2">
+                                                <label>Agama</label>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <select name="religion" class="form-control" required="">
+                                                    <option value="<?= $row['religion'] ?>"><?= $row['religion'] ?></option>
+                                                    <option value="Islam">Islam</option>
+													<option value="Katolik">Katolik</option>
+													<option value="Hindu">Hindu</option>
+													<option value="Budha">Budha</option>
+													<option value="Konghucu">Konghucu
+                                                </select>
                                             </div>
                                             <br />
                                             <br />
@@ -264,7 +292,7 @@
                                                     }
                                                 ?>
                                             </div>
-                                            <<br />
+                                            <br />
                                             <br />
                                             <div class="col-sm-2">
                                                 <label>Upload File</label>
@@ -313,6 +341,7 @@
 				format: 'DD-MM-YYYY'
 				}
 			});
+
 			$('.dtpicker').on('apply.daterangepicker', function(ev, picker) {
 				$(this).val(picker.startDate.format('DD-MM-YYYY'));
 			});
