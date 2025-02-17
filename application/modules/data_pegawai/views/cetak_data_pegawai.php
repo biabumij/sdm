@@ -2,7 +2,7 @@
 <html>
 	<head>
 	<?= include 'lib.php'; ?>
-	  <title>ABSENSI</title>
+	  <title>DATA PEGAWAI</title>
 
 	  <?php
 		$search = array(
@@ -98,7 +98,7 @@
 				<td align="left"><?php echo $x['name'];?></td>
 				<td align="center"><?php echo $x['gender'];?></td>
 				<td align="left"><?= convertDateDBtoIndo($x["date_join"]); ?></td>
-				<td align="left"><?= $this->crud_global->GetField('tbl_admin_group',array('admin_group_id'=>$x['departement']),'admin_group_name'); ?></td>
+				<td align="left"><?= $this->crud_global->GetField('tbl_admin_group',array('admin_group_id'=>$x['position']),'admin_group_name'); ?></td>
 				<td align="left"><?= $this->crud_global->GetField('kategori_departemen',array('id'=>$x['departement']),'nama'); ?></td>
 				<td align="left"><?= $this->crud_global->GetField('kategori_proyek',array('id'=>$x['location']),'nama'); ?></td>
 				<?php

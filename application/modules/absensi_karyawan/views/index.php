@@ -62,7 +62,7 @@
                             <div class="panel">
                                 <div class="panel-header">
                                     <h3 class="section-subtitle">
-                                        <b style="text-transform:uppercase;"><?php echo $row[0]->menu_name; ?></b>
+                                        <b style="text-transform:uppercase;">DATA</b>
                                     </h3>
                                     <div class="text-left">
                                         <a href="<?php echo site_url('admin');?>">
@@ -71,12 +71,14 @@
                                 </div>
                                 <div class="panel-content">
                                     <ul class="nav nav-tabs" role="tablist">
-                                        <li role="presentation" class="active"><a href="#absen" aria-controls="absen" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">ABSENSI</a></li>
+                                        <li role="presentation" class="active"><a href="#absensi" aria-controls="absensi" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">ABSENSI</a></li>
                                         <li role="presentation"><a href="#cuti" aria-controls="cuti" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">CUTI</a></li>
+                                        <li role="presentation"><a href="#pengajuan_absensi" aria-controls="pengajuan_absensi" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">PENGAJUAN ABSENSI</a></li>
+                                        <li role="presentation"><a href="#data_pegawai" aria-controls="data_pegawai" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">DATA PEGAWAI</a></li>
                                     </ul>
                                     <div class="tab-content">
                                     <br />
-                                        <div role="tabpanel" class="tab-pane active" id="absen">
+                                        <div role="tabpanel" class="tab-pane active" id="absensi">
                                             <form action="<?php echo site_url('absensi_karyawan/cetak_absensi');?>" target="_blank">
                                                 <div class="col-sm-3">
                                                     <input type="text" id="filter_date_absensi" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
@@ -124,6 +126,68 @@
                                                             <th>Nama Pegawai</th>
                                                             <th>File</th>
                                                             <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div role="tabpanel" class="tab-pane" id="pengajuan_absensi">
+                                            <form action="<?php echo site_url('absensi/cetak_pengajuan_absensi');?>" target="_blank">
+                                                <div class="col-sm-3">
+                                                    <input type="text" id="filter_date_pengajuan_absensi" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
+                                                </div>
+                                                <!--<div class="col-sm-3">
+                                                    <button type="submit" class="btn btn-default" style="border-radius:10px; font-weight:bold;">PRINT</button>
+                                                </div>-->
+                                            </form>
+                                            <br />
+                                            <br />
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover" id="table_pengajuan_absensi" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Nama Pegawai</th>
+                                                            <th>Tanggal Pengajuan</th>
+                                                            <th>Status</th>
+                                                            <th>Clock-In</th>
+                                                            <th>Clock-Out</th>
+                                                            <th>Alasan</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div role="tabpanel" class="tab-pane" id="data_pegawai">
+                                            <form action="<?php echo site_url('absensi_karyawan/cetak_data_pegawai');?>" target="_blank">
+                                                <div class="col-sm-3">
+                                                    <input type="text" id="filter_date_pegawai" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
+                                                </div>
+                                            </form>
+                                            <div class="col-sm-2 text-left">
+                                                <button style="background-color:#88b93c; border:1px solid black; border-radius:10px; line-height:30px;"><a href="<?php echo site_url('data_pegawai/form_data_pegawai'); ?>"><b style="color:white;">Input Data Pegawai</b></a></button>
+                                            </div>
+                                            <br />
+                                            <br />
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover" id="table_pegawai" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Nama Pegawai</th>
+                                                            <th>Tanggal Bergabung</th>
+                                                            <th>Jabatan</th>
+                                                            <th>Departemen</th>
+                                                            <th>Lampiran</th>
+                                                            <th>Lihat Data</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -275,6 +339,108 @@
             $('#filter_date_cuti').on('apply.daterangepicker', function(ev, picker) {
                 $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
                 table_cuti.ajax.reload();
+            });
+
+            /*PENGAJUAN ABSENSI*/
+            var table_pengajuan_absensi = $('#table_pengajuan_absensi').DataTable( {"bAutoWidth": false,
+                ajax: {
+                    processing: true,
+                    serverSide: true,
+                    url: '<?php echo site_url('absensi_karyawan/table_pengajuan_absensi'); ?>',
+                    type: 'POST',
+                    data: function(d) {
+                        d.filter_date = $('#filter_date_pengajuan_absensi').val();
+                    }
+                },
+                responsive: true,
+                paging : false,
+                "deferRender": true,
+                "language": {
+                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+                },
+                columns: [
+                    {
+                        "data": "no"
+                    },
+                    {
+                        "data": "nama_pegawai"
+                    },
+                    {
+                        "data": "date"
+                    },
+                    {
+                        "data": "status"
+                    },
+                    {
+                        "data": "clock_in"
+                    },
+                    {
+                        "data": "clock_out"
+                    },
+                    {
+                        "data": "reason"
+                    },
+                ],
+                "columnDefs": [
+                    { "width": "5%", "targets": 0, "className": 'text-center'},
+                ],
+            });
+
+            $('#filter_date_pengajuan_absensi').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
+                table_pengajuan_absensi.ajax.reload();
+            });
+
+            /*DATA PEGAWAI*/
+            var table_pegawai = $('#table_pegawai').DataTable( {"bAutoWidth": false,
+                ajax: {
+                    processing: true,
+                    serverSide: true,
+                    url: '<?php echo site_url('absensi_karyawan/table_pegawai'); ?>',
+                    type: 'POST',
+                    data: function(d) {
+                        d.filter_date = $('#filter_date_pegawai').val();
+                    }
+                },
+                responsive: true,
+                paging : false,
+                "deferRender": true,
+                "language": {
+                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+                },
+                columns: [
+                    {
+                        "data": "no"
+                    },
+                    {
+                        "data": "name"
+                    },
+                    {
+                        "data": "date_join"
+                    },
+                    {
+                        "data": "position"
+                    },
+                    {
+                        "data": "departement"
+                    },
+                    {
+                        "data": "lampiran"
+                    },
+                    {
+                        "data": "actions"
+                    },
+                ],
+                "columnDefs": [
+                    { "width": "5%", "targets": 0, "className": 'text-center'},
+                    { "width": "15%", "targets": [1,2,3,4,5], "className": 'text-left'},
+                    { "width": "10%", "targets": 6, "className": 'text-center'},
+                ],
+            });
+
+            $('#filter_date_pegawai').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
+                table_pegawai.ajax.reload();
             });
         </script>
     </body>

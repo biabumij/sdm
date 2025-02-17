@@ -1,5 +1,5 @@
 <?php
-if(in_array($this->session->userdata('admin_group_id'), array(1,3,12))){
+if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
 ?>
 <!doctype html>
 <html lang="en" class="fixed">
@@ -143,7 +143,7 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,12))){
                                         <div role="tabpanel" class="tab-pane" id="pengajuan_absensi">
                                             <form action="<?php echo site_url('absensi/cetak_pengajuan_absensi');?>" target="_blank">
                                                 <div class="col-sm-3">
-                                                    <input type="text" id="filter_date_cuti" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
+                                                    <input type="text" id="filter_date_pengajuan_absensi" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
                                                 </div>
                                                 <!--<div class="col-sm-3">
                                                     <button type="submit" class="btn btn-default" style="border-radius:10px; font-weight:bold;">PRINT</button>

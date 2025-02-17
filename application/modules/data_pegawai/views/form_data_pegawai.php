@@ -60,6 +60,25 @@
 									<form method="POST" action="<?php echo site_url('data_pegawai/submit_data_pegawai');?>" id="form-po" enctype="multipart/form-data" autocomplete="off">
 										<div class="row">
 											<div class="col-sm-2">
+												<label>Akun Login Sistem</label>
+											</div>
+											<div class="col-sm-3">
+												<select class="form-control form-select2" name="login" required="" >
+													<option>Pilih Akun Login</option>
+													<?php
+													if(!empty($login)){
+														foreach ($login as $x) {
+															?>
+															<option value="<?php echo $x['admin_id'];?>"><?php echo $x['admin_email'];?></option>
+															<?php
+														}
+													}
+													?>
+												</select>
+											</div>
+											<br />
+											<br />
+											<div class="col-sm-2">
 												<label>NIP</label>
 											</div>
 											<div class="col-sm-2">

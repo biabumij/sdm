@@ -48,6 +48,25 @@
                                     <input type="hidden" name="id" value="<?= $row["id"] ?>">
                                         <div class="row">
                                             <div class="col-sm-2">
+                                                <label>Akun Login Sistem</label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <select class="form-control form-select2" name="login" required="">
+                                                    <option>Pilih Akun Login</option>
+                                                    <?php
+                                                    if(!empty($login)){
+                                                        foreach ($login as $key => $x) {
+                                                            ?>
+                                                            <option value="<?= $x['admin_id']; ?>" <?= ($x['admin_id'] == $row['login']) ? 'selected' : '' ?>><?= $x['admin_email']; ?></option>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <br />
+                                            <br />
+                                            <div class="col-sm-2">
                                                 <label>NIP</label>
                                             </div>
                                             <div class="col-sm-2">
@@ -286,7 +305,6 @@
                                                         foreach ($dataLampiran as $key => $lampiran) {
                                                             ?>
                                                             <div><a href="<?= base_url() . 'uploads/pegawai/' . $lampiran['lampiran']; ?>" target="_blank"><?= $lampiran['lampiran']; ?></a></div>
-                                                            <input type="hidden" class="form-control" name="lampiran_pegawai_id" required="" value="<?= $lampiran["pegawai_id"]; ?>">
                                                             <?php
                                                         }
                                                     }

@@ -106,7 +106,7 @@
 
         /* Animation */
         @keyframes Gradient{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
-        #flippy{text-align:center;margin:auto;display:inline}#flippy button{border-color:rgba(0,0,0,0.0);background:#fff;background-image:linear-gradient(to right,#FF0000 0%,#333333 51%,#FF0000 100%);background-size:200% auto;color:#fff;display:block;width:80%;padding:15px;font-weight:700;font-size:14px;text-align:center;text-transform:uppercase;letter-spacing:0.5px;margin:10px auto;border-radius:10px;box-shadow:0 2px 3px rgba(0,0,0,0.06),0 2px 3px rgba(0,0,0,0.1);transition:all .3s}#flippy button:hover,#flippy button:focus{background-position: right center;outline:none;opacity:1;color:#fff}#flippanel{display:none;padding:10px 0;text-align:left;background:#fff;margin:10px 0 0 0}#flippanel img{background:#f5f5f5;margin:10px auto}
+        #flippy{text-align:center;margin:auto;display:inline}#flippy button{border-color:rgba(0,0,0,0.0);background:#fff;background-image:linear-gradient(to right,#0b5394 0%,#333333 51%,#0b5394 100%);background-size:200% auto;color:#fff;display:block;width:80%;padding:15px;font-weight:700;font-size:14px;text-align:center;text-transform:uppercase;letter-spacing:0.5px;margin:10px auto;border-radius:10px;box-shadow:0 2px 3px rgba(0,0,0,0.06),0 2px 3px rgba(0,0,0,0.1);transition:all .3s}#flippy button:hover,#flippy button:focus{background-position: right center;outline:none;opacity:1;color:#fff}#flippanel{display:none;padding:10px 0;text-align:left;background:#fff;margin:10px 0 0 0}#flippanel img{background:#f5f5f5;margin:10px auto}
 
         /* Animation */
         @keyframes Gradient{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
@@ -144,9 +144,9 @@
             <?php echo $this->Templates->PageHeader();?>
             <div class="page-body">
                 <div id="about" class="container spacer about">
-                <?php
-                if(in_array($this->session->userdata('admin_group_id'), array(1,2,3))){
-                ?>
+                    <?php
+                    if(in_array($this->session->userdata('admin_group_id'), array(1,2,3))){
+                    ?>
                     <div class="col-sm-12" style="background-image:linear-gradient(to right,#0B5394 0%,#23649e 51%,#0B5394 100%); font-size:18px; border-radius: 10px; padding:10px; margin-bottom:50px;">
                         <p style="text-align:center; font-weight:bold; color:white;">BUTUH PERSETUJUAN</p>
                         <figure class="highcharts-figure">
@@ -187,7 +187,7 @@
                     }
                     ?>
                     <div id="flippy_menu">
-                        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler_menu') .style.display=='none') {document.getElementById('spoiler_menu') .style.display=''}else{document.getElementById('spoiler_menu') .style.display='none'}"><i class="fa-regular fa-hand-point-right"></i> MENU (SHOW/HIDE)</button>
+                        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler_menu') .style.display=='none') {document.getElementById('spoiler_menu') .style.display=''}else{document.getElementById('spoiler_menu') .style.display='none'}"><i class="fa-regular fa-hand-point-right"></i> MENU USERS (SHOW/HIDE)</button>
                     </div>
                     <div id="spoiler_menu" style="display:block">        
                         <div class="process">
@@ -213,7 +213,7 @@
                                         <ul class="row text-center list-inline  wowload bounceIn">
                                             <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
                                                 <a href="<?php echo site_url('admin/absensi_karyawan');?>">
-                                                <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>REKAP</b></span></a>
+                                                <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>DATA</b></span></a>
                                             </li>
                                         </ul>
                                     </th>
@@ -242,9 +242,17 @@
                                     </th>
                                 </tr>
                             </table>
-                            <?php
-                            if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
-                            ?>
+                        </div>
+                    </div>
+                    
+                    <?php
+                    if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
+                    ?>
+                    <div id="flippy">
+                        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}"><i class="fa-regular fa-hand-point-right"></i>  MENU ADMIN (SHOW/HIDE)</button>
+                    </div>
+                    <div id="spoiler" style="display:block">        
+                         <div class="process">
                             <table width="100%" style="margin-top:100px;">
                                 <tr>
                                     <?php

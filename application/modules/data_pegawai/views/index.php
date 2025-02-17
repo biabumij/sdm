@@ -118,10 +118,10 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                                                 <div class="col-sm-3">
                                                     <input type="text" id="filter_date_slip_gaji" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
                                                 </div>
-                                                <div class="col-sm-3">
-                                                    <button type="submit" class="btn btn-default" style="border-radius:10px; font-weight:bold;">PRINT</button>
-                                                </div>
                                             </form>
+                                            <div class="col-sm-2 text-left">
+                                                <button style="background-color:#88b93c; border:1px solid black; border-radius:10px; line-height:30px;"><a href="<?php echo site_url('data_pegawai/form_slip_gaji'); ?>"><b style="color:white;">Input Slip Gaji</b></a></button>
+                                            </div>
                                             <br />
                                             <br />
                                             <div class="table-responsive">
@@ -130,6 +130,7 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                                                         <tr>
                                                             <th>No</th>
                                                             <th>Nama Pegawai</th>
+                                                            <th>Tindakan</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -272,13 +273,42 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                         "data": "no"
                     },
                     {
-                        "data": "name"
+                        "data": "nama_pegawai"
+                    },
+                    {
+                        "data": "actions"
                     },
                 ],
                 "columnDefs": [
                     { "width": "5%", "targets": 0, "className": 'text-center'},
+                    { "width": "10%", "targets": 2, "className": 'text-center'},
                 ],
             });
+
+            function DeleteSlipGaji(id) {
+            bootbox.confirm("Apakah Anda yakin untuk menghapus data ini ?", function(result) {
+                    // console.log('This was logged in the callback: ' + result); 
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "<?php echo site_url('data_pegawai/delete_slip_gaji'); ?>",
+                            dataType: 'json',
+                            data: {
+                                id: id
+                            },
+                            success: function(result) {
+                                if (result.output) {
+                                    table_slip_gaji.ajax.reload();
+                                    bootbox.alert('<b>DELETED</b>');
+                                } else if (result.err) {
+                                    bootbox.alert(result.err);
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+
         </script>
     </body>
 </html>

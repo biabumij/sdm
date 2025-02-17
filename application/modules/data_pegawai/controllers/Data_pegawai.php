@@ -22,6 +22,7 @@ class Data_pegawai extends Secure_Controller {
 			$data['position'] = $this->db->order_by('admin_group_name', 'asc')->select('*')->get_where('tbl_admin_group')->result_array();
 			$data['departement'] = $this->db->order_by('nama', 'asc')->select('*')->get_where('kategori_departemen')->result_array();
 			$data['location'] = $this->db->order_by('nama', 'asc')->select('*')->get_where('kategori_proyek')->result_array();
+			$data['login'] = $this->db->order_by('admin_name', 'asc')->select('*')->get_where('tbl_admin')->result_array();
 			$this->load->view('data_pegawai/form_data_pegawai', $data);
 		} else {
 			redirect('admin');
@@ -100,6 +101,7 @@ class Data_pegawai extends Secure_Controller {
 
 	public function submit_data_pegawai()
 	{
+		$login = $this->input->post('login');
 		$nip = $this->input->post('nip');
 		$name = $this->input->post('name');
 		$gender = $this->input->post('gender');
@@ -129,6 +131,7 @@ class Data_pegawai extends Secure_Controller {
         $created_on = date('Y-m-d H:i:s');
 
 		$arr_insert = array(
+			'login' => $login,
 			'nip' => $nip,
 			'name' => $name,
 			'gender' => $gender,
@@ -258,11 +261,23 @@ class Data_pegawai extends Secure_Controller {
 		$output['output'] = false;
 		$id = $this->input->post('id');
 		if(!empty($id)){
+
+			$file = $this->db->select('id as pegawai_id, lampiran')
+			->from('lampiran_pegawai')
+			->where("pegawai_id = $id")
+			->get()->row_array();
+
+			$path = './uploads/pegawai/'.$file['lampiran'];
+			chmod($path, 0777);
+			unlink($path);
+
+			$this->db->delete('lampiran_pegawai', array('pegawai_id' => $id));
 			$this->db->delete('data_pegawai', array('id' => $id));
 			{
 				$output['output'] = true;
 			}
 		}
+
 		echo json_encode($output);
 	}
 
@@ -275,6 +290,7 @@ class Data_pegawai extends Secure_Controller {
 			$data['position'] = $this->db->order_by('admin_group_name', 'asc')->select('*')->get_where('tbl_admin_group')->result_array();
 			$data['departement'] = $this->db->order_by('nama', 'asc')->select('*')->get_where('kategori_departemen')->result_array();
 			$data['location'] = $this->db->order_by('nama', 'asc')->select('*')->get_where('kategori_proyek')->result_array();
+			$data['login'] = $this->db->order_by('admin_name', 'asc')->select('*')->get_where('tbl_admin')->result_array();
 			$this->load->view('data_pegawai/sunting_data_pegawai', $data);
 		} else {
 			redirect('admin');
@@ -283,6 +299,7 @@ class Data_pegawai extends Secure_Controller {
 
 	public function submit_sunting_pegawai()
 	{
+		$login = $this->input->post('login');
 		$nip = $this->input->post('nip');
 		$name = $this->input->post('name');
 		$gender = $this->input->post('gender');
@@ -312,6 +329,7 @@ class Data_pegawai extends Secure_Controller {
         $updated_on = date('Y-m-d H:i:s');
 
 		$arr_update = array(
+			'login' => $login,
 			'nip' => $nip,
 			'name' => $name,
 			'gender' => $gender,
@@ -342,6 +360,49 @@ class Data_pegawai extends Secure_Controller {
 		);
 
 		if ($this->db->update('data_pegawai', $arr_update)) {
+			$pegawai_id = $this->input->post('id');
+
+			if (!file_exists('uploads/pegawai')) {
+			    mkdir('uploads/pegawai', 0777, true);
+			}
+
+			$data = [];
+			$count = count($_FILES['files']['name']);
+			for ($i = 0; $i < $count; $i++) {
+
+				if (!empty($_FILES['files']['name'][$i])) {
+
+					$_FILES['file']['name'] = $_FILES['files']['name'][$i];
+					$_FILES['file']['type'] = $_FILES['files']['type'][$i];
+					$_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+					$_FILES['file']['error'] = $_FILES['files']['error'][$i];
+					$_FILES['file']['size'] = $_FILES['files']['size'][$i];
+
+					$config['upload_path'] = 'uploads/pegawai';
+					$config['allowed_types'] = 'jpg|jpeg|png|pdf';
+					$config['file_name'] = $_FILES['files']['name'][$i];
+
+					$this->load->library('upload', $config);
+
+					if ($this->upload->do_upload('file')) {
+						$uploadData = $this->upload->data();
+						$filename = $uploadData['file_name'];
+
+						$data['totalFiles'][] = $filename;
+
+
+						$data[$i] = array(
+							'pegawai_id' => $pegawai_id,
+							'lampiran'  => $data['totalFiles'][$i]
+						);
+
+						$this->db->insert('lampiran_pegawai', $data[$i]);
+					}
+				}
+			}
+		}
+
+		/*if ($this->db->update('data_pegawai', $arr_update)) {
 			$pegawai_id = $this->input->post('lampiran_pegawai_id');
 
 			$file = $this->db->select('lampiran')
@@ -391,7 +452,7 @@ class Data_pegawai extends Secure_Controller {
 					}
 				}
 			}
-		}
+		}*/
 
 		if ($this->db->trans_status() === FALSE) {
 			# Something went wrong.
@@ -444,6 +505,66 @@ class Data_pegawai extends Secure_Controller {
         $pdf->Output('data_pegawai'.'.pdf', 'I');
 	}
 
+	/*SLIP GAJI*/
+	public function form_slip_gaji()
+	{
+		$check = $this->m_admin->check_login();
+		if ($check == true) {
+			$data['pegawai'] = $this->db->order_by('name', 'asc')->select('*')->get_where('data_pegawai')->result_array();
+			$this->load->view('data_pegawai/form_slip_gaji', $data);
+		} else {
+			redirect('admin');
+		}
+	}
+
+	public function submit_slip_gaji()
+	{
+		$nama_pegawai = $this->input->post('nama_pegawai');
+		$basic_salary = str_replace('.', '', $this->input->post('basic_salary'));
+		$tax = str_replace('.', '', $this->input->post('tax'));
+		$jkk = str_replace('.', '', $this->input->post('jkk'));
+		$jkm = str_replace('.', '', $this->input->post('jkm'));
+		$jht_perusahaan = str_replace('.', '', $this->input->post('jht_perusahaan'));
+		$jaminan_pensiun_perusahaan = str_replace('.', '', $this->input->post('jaminan_pensiun_perusahaan'));
+		$bpjs_kesehatan_perusahaan = str_replace('.', '', $this->input->post('bpjs_kesehatan_perusahaan'));
+		$bpjs_kesehatan = str_replace('.', '', $this->input->post('bpjs_kesehatan'));
+		$jht = str_replace('.', '', $this->input->post('jht'));
+		$jaminan_pensiun = str_replace('.', '', $this->input->post('jaminan_pensiun'));
+		$created_by = $this->session->userdata('admin_id');
+        $created_on = date('Y-m-d H:i:s');
+
+		$arr_insert = array(
+			'nama_pegawai' => $nama_pegawai,
+			'basic_salary' => $basic_salary,
+			'tax' => $tax,
+			'jkk' => $jkk,
+			'jkm' => $jkm,
+			'jht_perusahaan' => $jht_perusahaan,
+			'jaminan_pensiun_perusahaan' => $jaminan_pensiun_perusahaan,
+			'bpjs_kesehatan_perusahaan' => $bpjs_kesehatan_perusahaan,
+			'bpjs_kesehatan' => $bpjs_kesehatan,
+			'jht' => $jht,
+			'jaminan_pensiun' => $jaminan_pensiun,
+			'created_by' => $created_by,
+			'created_on' => $created_on,
+		);
+
+		$this->db->insert('slip_gaji',$arr_insert);
+
+		if ($this->db->trans_status() === FALSE) {
+			# Something went wrong.
+			$this->db->trans_rollback();
+			$this->session->set_flashdata('notif_error','<b>Gagal Membuat Slip Gaji</b>');
+			redirect('admin/data_pegawai');
+		} else {
+			# Everything is Perfect. 
+			# Committing data to the database.
+			$this->db->trans_commit();
+			$this->session->set_flashdata('notif_success','<b>Berhasil Membuat Slip Gaji</b>');
+			redirect('admin/data_pegawai');
+		}
+	}
+
 	public function table_slip_gaji()
 	{   
         $data = array();
@@ -455,22 +576,17 @@ class Data_pegawai extends Secure_Controller {
 			$this->db->where('pg.created_on  >=', date('Y-m-d G:i:s', strtotime($start_date.' 00:00:00')));
             $this->db->where('pg.created_on <=', date('Y-m-d G:i:s', strtotime($end_date.' 23:59:59')));
 		}
-        $this->db->select('pg.*, lk.lampiran');
-		$this->db->join('lampiran_pegawai lk', 'pg.id = lk.pegawai_id','left');
-		$this->db->order_by('pg.created_on','desc');
-		$query = $this->db->get('data_pegawai pg');
+        $this->db->select('*');
+		$this->db->order_by('nama_pegawai','asc');
+		$query = $this->db->get('slip_gaji');
 		
        if($query->num_rows() > 0){
 			foreach ($query->result_array() as $key => $row) {
                 $row['no'] = $key+1;
-				$row['name'] = $row['name'];
-				$row['date_join'] = date('d F Y',strtotime($row['date_join']));
-				$row['position'] = $this->crud_global->GetField('tbl_admin_group',array('admin_group_id'=>$row['position']),'admin_group_name');
-				$row['departement'] = $this->crud_global->GetField('kategori_departemen',array('id'=>$row['departement']),'nama');
-				$row['lampiran'] = '<a href="' . base_url('uploads/pegawai/' . $row['lampiran']) .'" target="_blank">' . $row['lampiran'] . '</a>'; 
+				$row['nama_pegawai'] = $this->crud_global->GetField('tbl_admin',array('admin_id'=>$row['nama_pegawai']),'admin_name');;
 
 				if(in_array($this->session->userdata('admin_group_id'), array(1,3,8))){
-					$row['actions'] = '<a href="'.site_url().'data_pegawai/sunting_pegawai/'.$row['id'].'" class="btn btn-warning" style="border-radius:10px;"><i class="fa fa-edit"></i> </a> <a href="javascript:void(0);" onclick="DeleteDataPegawai('.$row['id'].')" class="btn btn-danger" style="border-radius:10px;"><i class="fa fa-close"></i> </a>';
+					$row['actions'] = '<a href="'.site_url().'data_pegawai/sunting_slip_gaji/'.$row['id'].'" class="btn btn-warning" style="border-radius:10px;"><i class="fa fa-edit"></i> </a> <a href="javascript:void(0);" onclick="DeleteSlipGaji('.$row['id'].')" class="btn btn-danger" style="border-radius:10px;"><i class="fa fa-close"></i> </a>';
 				}else {
 					$row['actions'] = '-';
 				}
@@ -481,6 +597,80 @@ class Data_pegawai extends Secure_Controller {
         }
         echo json_encode(array('data'=>$data));
     }
+
+	public function delete_slip_gaji()
+	{
+		$output['output'] = false;
+		$id = $this->input->post('id');
+		if(!empty($id)){
+			$this->db->delete('slip_gaji', array('id' => $id));
+			{
+				$output['output'] = true;
+			}
+		}
+		echo json_encode($output);
+	}
+
+	public function sunting_slip_gaji($id)
+	{
+		$check = $this->m_admin->check_login();
+		if ($check == true) {
+			$data['tes'] = '';
+			$data['row'] = $this->db->get_where("slip_gaji", ["id" => $id])->row_array();
+			$data['pegawai'] = $this->db->order_by('name', 'asc')->select('*')->get_where('data_pegawai')->result_array();
+			$this->load->view('data_pegawai/sunting_slip_gaji', $data);
+		} else {
+			redirect('admin');
+		}
+	}
+
+	public function submit_sunting_slip_gaji()
+	{
+		$nama_pegawai = $this->input->post('nama_pegawai');
+		$basic_salary = str_replace('.', '', $this->input->post('basic_salary'));
+		$tax = str_replace('.', '', $this->input->post('tax'));
+		$jkk = str_replace('.', '', $this->input->post('jkk'));
+		$jkm = str_replace('.', '', $this->input->post('jkm'));
+		$jht_perusahaan = str_replace('.', '', $this->input->post('jht_perusahaan'));
+		$jaminan_pensiun_perusahaan = str_replace('.', '', $this->input->post('jaminan_pensiun_perusahaan'));
+		$bpjs_kesehatan_perusahaan = str_replace('.', '', $this->input->post('bpjs_kesehatan_perusahaan'));
+		$bpjs_kesehatan = str_replace('.', '', $this->input->post('bpjs_kesehatan'));
+		$jht = str_replace('.', '', $this->input->post('jht'));
+		$jaminan_pensiun = str_replace('.', '', $this->input->post('jaminan_pensiun'));
+		$updated_by = $this->session->userdata('admin_id');
+        $updated_on = date('Y-m-d H:i:s');
+
+		$arr_update = array(
+			'nama_pegawai' => $nama_pegawai,
+			'basic_salary' => $basic_salary,
+			'tax' => $tax,
+			'jkk' => $jkk,
+			'jkm' => $jkm,
+			'jht_perusahaan' => $jht_perusahaan,
+			'jaminan_pensiun_perusahaan' => $jaminan_pensiun_perusahaan,
+			'bpjs_kesehatan_perusahaan' => $bpjs_kesehatan_perusahaan,
+			'bpjs_kesehatan' => $bpjs_kesehatan,
+			'jht' => $jht,
+			'jaminan_pensiun' => $jaminan_pensiun,
+			'updated_by' => $updated_by,
+			'updated_on' => $updated_on,
+		);
+
+		$this->db->update('slip_gaji',$arr_update);
+
+		if ($this->db->trans_status() === FALSE) {
+			# Something went wrong.
+			$this->db->trans_rollback();
+			$this->session->set_flashdata('notif_error','<b>Gagal Membuat Slip Gaji</b>');
+			redirect('admin/data_pegawai');
+		} else {
+			# Everything is Perfect. 
+			# Committing data to the database.
+			$this->db->trans_commit();
+			$this->session->set_flashdata('notif_success','<b>Berhasil Membuat Slip Gaji</b>');
+			redirect('admin/data_pegawai');
+		}
+	}
 
 }
 ?>
