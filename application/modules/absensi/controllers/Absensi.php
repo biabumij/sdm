@@ -209,7 +209,6 @@ class Absensi extends Secure_Controller {
 		$data['start_date'] = $start_date;
 		$data['end_date'] = $end_date;
 		$data['data'] = $query->result_array();
-		file_put_contents("D:\\test.txt", $this->db->last_query());
         $html = $this->load->view('absensi/cetak_absensi',$data,TRUE);
         
 		$pdf->SetTitle('');
