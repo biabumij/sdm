@@ -585,7 +585,7 @@ class Data_pegawai extends Secure_Controller {
                 $row['no'] = $key+1;
 				$row['nama_pegawai'] = $this->crud_global->GetField('tbl_admin',array('admin_id'=>$row['nama_pegawai']),'admin_name');;
 
-				if(in_array($this->session->userdata('admin_group_id'), array(1,2,5))){
+				if(in_array($this->session->userdata('admin_id'), array(1,2,5))){
 					$row['actions'] = '<a href="'.site_url().'data_pegawai/sunting_slip_gaji/'.$row['id'].'" class="btn btn-warning" style="border-radius:10px;"><i class="fa fa-edit"></i> </a> <a href="javascript:void(0);" onclick="DeleteSlipGaji('.$row['id'].')" class="btn btn-danger" style="border-radius:10px;"><i class="fa fa-close"></i> </a>';
 				}else {
 					$row['actions'] = '-';
