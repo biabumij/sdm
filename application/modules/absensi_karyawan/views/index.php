@@ -172,9 +172,6 @@
                                                     <input type="text" id="filter_date_pegawai" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
                                                 </div>
                                             </form>
-                                            <div class="col-sm-2 text-left">
-                                                <button style="background-color:#88b93c; border:1px solid black; border-radius:10px; line-height:30px;"><a href="<?php echo site_url('data_pegawai/form_data_pegawai'); ?>"><b style="color:white;">Input Data Pegawai</b></a></button>
-                                            </div>
                                             <br />
                                             <br />
                                             <div class="table-responsive">
