@@ -82,8 +82,23 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                                     <br />
                                         <div role="tabpanel" class="tab-pane active" id="absen">
                                             <form action="<?php echo site_url('absensi/cetak_absensi');?>" target="_blank">
+                                                <?php
+                                                $organisasi= $this->db->order_by('organisasi','asc')->group_by('organisasi')->get_where('tbl_admin',array('status'=>1))->result_array();
+                                                ?>
                                                 <div class="col-sm-3">
                                                     <input type="text" id="filter_date_absensi" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <select id="filter_organisasi" name="filter_organisasi" class="form-control select2">
+                                                        <option value="">Pilih Organisasi</option>
+                                                        <?php
+                                                        foreach ($organisasi as $key => $og) {
+                                                            ?>
+                                                            <option value="<?php echo $og['organisasi'];?>"><?php echo $og['organisasi'];?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </select>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <button type="submit" class="btn btn-default" style="border-radius:10px; font-weight:bold;">PRINT</button>
@@ -115,6 +130,18 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                                                 <div class="col-sm-3">
                                                     <input type="text" id="filter_date_cuti" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
                                                 </div>
+                                                <div class="col-sm-3">
+                                                    <select id="filter_organisasi_cuti" name="filter_organisasi" class="form-control select2">
+                                                        <option value="">Pilih Organisasi</option>
+                                                        <?php
+                                                        foreach ($organisasi as $key => $og) {
+                                                            ?>
+                                                            <option value="<?php echo $og['organisasi'];?>"><?php echo $og['organisasi'];?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
                                                 <!--<div class="col-sm-3">
                                                     <button type="submit" class="btn btn-default" style="border-radius:10px; font-weight:bold;">PRINT</button>
                                                 </div>-->
@@ -144,6 +171,18 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                                             <form action="<?php echo site_url('absensi/cetak_pengajuan_absensi');?>" target="_blank">
                                                 <div class="col-sm-3">
                                                     <input type="text" id="filter_date_pengajuan_absensi" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <select id="filter_pengajuan_absensi" name="filter_organisasi" class="form-control select2">
+                                                        <option value="">Pilih Organisasi</option>
+                                                        <?php
+                                                        foreach ($organisasi as $key => $og) {
+                                                            ?>
+                                                            <option value="<?php echo $og['organisasi'];?>"><?php echo $og['organisasi'];?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </select>
                                                 </div>
                                                 <!--<div class="col-sm-3">
                                                     <button type="submit" class="btn btn-default" style="border-radius:10px; font-weight:bold;">PRINT</button>
@@ -217,6 +256,7 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                     type: 'POST',
                     data: function(d) {
                         d.filter_date = $('#filter_date_absensi').val();
+                        d.filter_organisasi = $('#filter_organisasi').val();
                     }
                 },
                 responsive: true,
@@ -257,6 +297,10 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                 table_absensi.ajax.reload();
             });
 
+            $('#filter_organisasi').change(function(){
+                table_absensi.ajax.reload();
+            });
+
             function DeleteDataAbsensi(id) {
             bootbox.confirm("Apakah Anda yakin untuk menghapus data ini ?", function(result) {
                     // console.log('This was logged in the callback: ' + result); 
@@ -290,6 +334,7 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                     type: 'POST',
                     data: function(d) {
                         d.filter_date = $('#filter_date_cuti').val();
+                        d.filter_organisasi = $('#filter_organisasi_cuti').val();
                     }
                 },
                 responsive: true,
@@ -329,6 +374,10 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                 table_cuti.ajax.reload();
             });
 
+            $('#filter_organisasi_cuti').change(function(){
+                table_cuti.ajax.reload();
+            });
+
             /*PENGAJUAN ABSENSI*/
             var table_pengajuan_absensi = $('#table_pengajuan_absensi').DataTable( {"bAutoWidth": false,
                 ajax: {
@@ -338,6 +387,7 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                     type: 'POST',
                     data: function(d) {
                         d.filter_date = $('#filter_date_pengajuan_absensi').val();
+                        d.filter_organisasi = $('#filter_pengajuan_absensi').val();
                     }
                 },
                 responsive: true,
@@ -383,6 +433,10 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
 
             $('#filter_date_pengajuan_absensi').on('apply.daterangepicker', function(ev, picker) {
                 $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
+                table_pengajuan_absensi.ajax.reload();
+            });
+
+            $('#filter_pengajuan_absensi').change(function(){
                 table_pengajuan_absensi.ajax.reload();
             });
         </script>

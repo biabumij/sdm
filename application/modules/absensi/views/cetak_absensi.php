@@ -118,7 +118,7 @@
 				<?php
 				$clock_out = $x['clock_out'];
 				if($clock_out == '00:00:00'){
-					$clock_out = 'Belum Clock-Out';
+					$clock_out = '-';
 				}else {
 					$clock_out = date('H:i',strtotime($x['clock_out']));
 				}

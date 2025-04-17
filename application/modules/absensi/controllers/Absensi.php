@@ -89,16 +89,23 @@ class Absensi extends Secure_Controller {
 	{   
         $data = array();
 		$filter_date = $this->input->post('filter_date');
+		$filter_organisasi = $this->input->post('filter_organisasi');
+
+		if(!empty($filter_organisasi)){
+			$this->db->where('adm.organisasi',$filter_organisasi);
+		}
+
 		if(!empty($filter_date)){
 			$arr_date = explode(' - ', $filter_date);
             $start_date = $arr_date[0];
             $end_date = $arr_date[1];
-			$this->db->where('date  >=', date('Y-m-d G:i:s', strtotime($start_date.' 00:00:00')));
-            $this->db->where('date <=', date('Y-m-d G:i:s', strtotime($end_date.' 23:59:59')));
+			$this->db->where('a.date  >=', date('Y-m-d G:i:s', strtotime($start_date.' 00:00:00')));
+            $this->db->where('a.date <=', date('Y-m-d G:i:s', strtotime($end_date.' 23:59:59')));
 		}
-        $this->db->select('*');
-		$this->db->order_by('date','desc');
-		$query = $this->db->get('absensi');
+        $this->db->select('a.*, adm.organisasi');
+		$this->db->join('tbl_admin adm', 'a.nama_pegawai = adm.admin_id', 'left');
+		$this->db->order_by('a.date','desc');
+		$query = $this->db->get('absensi a');
 		
        if($query->num_rows() > 0){
 			foreach ($query->result_array() as $key => $row) {
@@ -108,7 +115,7 @@ class Absensi extends Secure_Controller {
 				$row['clock_in'] = date('H:i:s',strtotime($row['clock_in']));
 
 				if($row['clock_out'] == '00:00:00'){
-				    $row['clock_out'] = 'Belum Clock-Out';
+				    $row['clock_out'] = '-';
 				}else {
 					$row['clock_out'] = date('H:i:s',strtotime($row['clock_out']));
 				}
@@ -193,6 +200,12 @@ class Absensi extends Secure_Controller {
 
 		$arr_data = array();
 		$arr_date = $this->input->get('filter_date');
+		$filter_organisasi = $this->input->get('filter_organisasi');
+
+		if(!empty($filter_organisasi)){
+			$this->db->where('adm.organisasi',$filter_organisasi);
+		}
+
 		if(empty($arr_date)){
 			$filter_date = '-';
 		}else {
@@ -201,8 +214,11 @@ class Absensi extends Secure_Controller {
 			$end_date = date('Y-m-d',strtotime($arr_filter_date[1]));
 			$filter_date = date('d F Y',strtotime($arr_filter_date[0])).' - '.date('d F Y',strtotime($arr_filter_date[1]));
 		}
-		$this->db->order_by('date','asc');
-		$query = $this->db->get('absensi');
+
+		$this->db->select('a.*, adm.organisasi');
+		$this->db->join('tbl_admin adm', 'a.nama_pegawai = adm.admin_id', 'left');
+		$this->db->order_by('a.date','asc');
+		$query = $this->db->get('absensi a');
 		$data['data'] = $query->result_array();
 
 		$data['filter_date'] = $filter_date;
@@ -346,6 +362,12 @@ class Absensi extends Secure_Controller {
 	{   
         $data = array();
 		$filter_date = $this->input->post('filter_date');
+		$filter_organisasi = $this->input->post('filter_organisasi');
+
+		if(!empty($filter_organisasi)){
+			$this->db->where('adm.organisasi',$filter_organisasi);
+		}
+
 		if(!empty($filter_date)){
 			$arr_date = explode(' - ', $filter_date);
             $start_date = $arr_date[0];
@@ -355,6 +377,7 @@ class Absensi extends Secure_Controller {
 		}
         $this->db->select('c.*, lk.lampiran');
 		$this->db->join('lampiran_cuti lk', 'c.id = lk.cuti_id','left');
+		$this->db->join('tbl_admin adm', 'c.created_by = adm.admin_id', 'left');
 		$this->db->order_by('c.created_on','desc');
 		$query = $this->db->get('cuti c');
 		
@@ -459,16 +482,22 @@ class Absensi extends Secure_Controller {
 	{   
         $data = array();
 		$filter_date = $this->input->post('filter_date');
+		$filter_organisasi = $this->input->post('filter_organisasi');
+
+		if(!empty($filter_organisasi)){
+			$this->db->where('adm.organisasi',$filter_organisasi);
+		}
 		if(!empty($filter_date)){
 			$arr_date = explode(' - ', $filter_date);
             $start_date = $arr_date[0];
             $end_date = $arr_date[1];
-			$this->db->where('date  >=', date('Y-m-d G:i:s', strtotime($start_date.' 00:00:00')));
-            $this->db->where('date <=', date('Y-m-d G:i:s', strtotime($end_date.' 23:59:59')));
+			$this->db->where('a.date  >=', date('Y-m-d G:i:s', strtotime($start_date.' 00:00:00')));
+            $this->db->where('a.date <=', date('Y-m-d G:i:s', strtotime($end_date.' 23:59:59')));
 		}
-        $this->db->select('*, date as date_pengajuan');
-		$this->db->order_by('date','desc');
-		$query = $this->db->get('pengajuan_absensi');
+        $this->db->select('a.*, a.date as date_pengajuan, adm.organisasi');
+		$this->db->join('tbl_admin adm', 'a.nama_pegawai = adm.admin_id', 'left');
+		$this->db->order_by('a.date','desc');
+		$query = $this->db->get('pengajuan_absensi a');
 		
        if($query->num_rows() > 0){
 			foreach ($query->result_array() as $key => $row) {
