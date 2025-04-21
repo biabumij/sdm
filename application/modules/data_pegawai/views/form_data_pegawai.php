@@ -118,7 +118,7 @@
 												<label>Jabatan</label>
 											</div>
 											<div class="col-sm-2">
-												<select class="form-control" name="position" required="" >
+												<select class="form-control form-select2" name="position" required="" >
 													<option>Pilih Jabatan</option>
 													<?php
 													if(!empty($position)){
@@ -132,7 +132,7 @@
 												</select>
 											</div>
 											<div class="col-sm-2">
-												<button style="background-color:#88b93c; border:1px solid black; border-radius:10px; line-height:15px; text-transform:capitalize;"><a href="<?php echo site_url('admin/admin_access'); ?>"><b style="color:white;"><i class="fa-solid fa-plus"></i> Tambah Jabatan</b></a></button>
+												<a href="<?php echo site_url('admin/admin_access'); ?>"><b style="color:white;"><i class="fa-solid fa-plus"></i> Tambah Jabatan</b></a>
 											</div>
 											<br />
 											<br />
@@ -140,7 +140,7 @@
 												<label>Departemen</label>
 											</div>
 											<div class="col-sm-2">
-												<select class="form-control" name="departement" required="" >
+												<select class="form-control form-select2" name="departement" required="" >
 													<option>Pilih Departemen</option>
 													<?php
 													if(!empty($departement)){
@@ -162,7 +162,7 @@
 												<label>Lokasi Tempat Kerja</label>
 											</div>
 											<div class="col-sm-2">
-												<select class="form-control" name="location" required="" >
+												<select class="form-control form-select2" name="location" required="" >
 													<option>Pilih Lokasi Kerja</option>
 													<?php
 													if(!empty($location)){
