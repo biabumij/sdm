@@ -118,7 +118,7 @@
 												<label>Jabatan</label>
 											</div>
 											<div class="col-sm-2">
-												<select class="form-control form-select2" name="position" required="" >
+												<select class="form-control" name="position" required="" >
 													<option>Pilih Jabatan</option>
 													<?php
 													if(!empty($position)){
@@ -140,7 +140,7 @@
 												<label>Departemen</label>
 											</div>
 											<div class="col-sm-2">
-												<select class="form-control form-select2" name="departement" required="" >
+												<select class="form-control" name="departement" required="" >
 													<option>Pilih Departemen</option>
 													<?php
 													if(!empty($departement)){
@@ -162,7 +162,7 @@
 												<label>Lokasi Tempat Kerja</label>
 											</div>
 											<div class="col-sm-2">
-												<select class="form-control form-select2" name="location" required="" >
+												<select class="form-control" name="location" required="" >
 													<option>Pilih Lokasi Kerja</option>
 													<?php
 													if(!empty($location)){
