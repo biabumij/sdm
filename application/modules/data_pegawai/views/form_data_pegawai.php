@@ -219,6 +219,7 @@
 												<select name="religion" class="form-control" required="">
 													<option>Pilih Agama</option>
 													<option value="Islam">Islam</option>
+													<option value="Kristen">Kristen</option>
 													<option value="Katolik">Katolik</option>
 													<option value="Hindu">Hindu</option>
 													<option value="Budha">Budha</option>
