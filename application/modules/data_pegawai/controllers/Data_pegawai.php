@@ -231,6 +231,7 @@ class Data_pegawai extends Secure_Controller {
 		}
         $this->db->select('pg.*, lk.lampiran');
 		$this->db->join('lampiran_pegawai lk', 'pg.id = lk.pegawai_id','left');
+		$this->db->group_by('pg.id');
 		$this->db->order_by('pg.created_on','desc');
 		$query = $this->db->get('data_pegawai pg');
 		
