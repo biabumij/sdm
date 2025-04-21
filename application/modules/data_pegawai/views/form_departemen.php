@@ -57,7 +57,7 @@
 									</div>
 								</div>
 								<div class="panel-content">
-									<form method="POST" action="<?php echo site_url('Data_pegawai/submit_departemen');?>" id="form-po" enctype="multipart/form-data" autocomplete="off">
+									<form method="POST" action="<?php echo site_url('data_pegawai/submit_departemen');?>" id="form-po" enctype="multipart/form-data" autocomplete="off">
 										<div class="row">
 											<div class="col-sm-2">
 												<label>Nama Departemen</label>
