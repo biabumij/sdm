@@ -154,7 +154,7 @@
 												</select>
 											</div>
 											<div class="col-sm-2">
-												<button style="background-color:#88b93c; border:1px solid black; border-radius:10px; line-height:15px; text-transform:capitalize;"><a href="<?php echo site_url('data_pegawai/form_departemen'); ?>"><b style="color:white;"><i class="fa-solid fa-plus"></i> Tambah Departemen</b></a></button>
+												<a href="<?php echo site_url('data_pegawai/form_departemen'); ?>"><b style="color:black;"><i class="fa-solid fa-plus"></i> Tambah Departemen</b></a>
 											</div>
 											<br />
 											<br />
@@ -176,7 +176,7 @@
 												</select>
 											</div>
 											<div class="col-sm-2">
-												<button style="background-color:#88b93c; border:1px solid black; border-radius:10px; line-height:15px; text-transform:capitalize;"><a href="<?php echo site_url('data_pegawai/form_location'); ?>"><b style="color:white;"><i class="fa-solid fa-plus"></i> Tambah Lokasi Kerja</b></a></button>
+												<a href="<?php echo site_url('data_pegawai/form_location'); ?>"><b style="color:black;"><i class="fa-solid fa-plus"></i> Tambah Lokasi Kerja</b></a>
 											</div>
 											<br />
 											<br />
