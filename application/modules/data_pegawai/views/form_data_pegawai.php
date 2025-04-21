@@ -132,7 +132,7 @@
 												</select>
 											</div>
 											<div class="col-sm-2">
-												<a href="<?php echo site_url('admin/admin_access'); ?>"><b style="color:white;"><i class="fa-solid fa-plus"></i> Tambah Jabatan</b></a>
+												<a href="<?php echo site_url('admin/admin_access'); ?>"><b style="color:black;"><i class="fa-solid fa-plus"></i> Tambah Jabatan</b></a>
 											</div>
 											<br />
 											<br />
