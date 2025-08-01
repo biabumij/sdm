@@ -1,6 +1,3 @@
-<?php
-if(in_array($this->session->userdata('admin_group_id'), array(1,3,12))){
-?>
 <!doctype html>
 <html lang="en" class="fixed">
 <head>
@@ -150,7 +147,3 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,12))){
 
 </body>
 </html>
-<?php
-}
-?>
-
