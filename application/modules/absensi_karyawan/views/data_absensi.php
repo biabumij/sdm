@@ -85,7 +85,13 @@
 										<label>Foto Selfie Clock-In</label>
 									</div>
 									<div class="col-sm-3">
-										<a href="<?= base_url("uploads/absensi/".$row['foto']) ?>" target="" >Lihat Foto</a>
+										<?php
+										// 1. Buat URL Foto (Hanya link-nya saja, bukan tag <a>-nya)
+										$url_foto = base_url("uploads/absensi/" . $row['foto']);
+										?>
+										<a href="<?= $url_foto ?>" target="_blank" class="btn btn-sm btn-primary">
+											Lihat Foto Selfie Clock-In
+										</a>
 									</div>
 									</br/>
 									</br/>
@@ -125,11 +131,14 @@
 									</div>
 									<div class="col-sm-3">
 										<?php
+										$url_foto_out = base_url("uploads/absensi_out/" . $row['foto_out']);
 										// 1. Perbaiki logika: Jika foto TIDAK kosong DAN bukan string 'NULL'
 										if (!empty($row['foto_out']) && $row['foto_out'] !== 'NULL') {
 											// Maka tampilkan link fotonya
 											?>
-											<a href="<?= base_url("uploads/absensi_out/".$row['foto_out']) ?>" target="_blank">Lihat Foto</a>
+											<a href="<?= $url_foto_out ?>" target="_blank" class="btn btn-sm btn-primary">
+												Lihat Foto Selfie Clock-Out
+											</a>
 											<?php
 										} else {
 											// Jika kosong, baru tampilkan pesan belum ada foto
