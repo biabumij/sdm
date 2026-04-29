@@ -100,6 +100,8 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                                                         ?>
                                                     </select>
                                                 </div>
+                                                <br />
+                                                <br />
                                                 <div class="col-sm-3">
                                                     <button type="submit" class="btn btn-default" style="border-radius:10px; font-weight:bold;">PRINT</button>
                                                 </div>

@@ -278,7 +278,7 @@
                                 ?>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#settings" aria-expanded="false" aria-controls="beton">
                                     <ul class="row text-center list-inline  wowload bounceIn">
-                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                        <li style="background: linear-gradient(110deg, #000000 20%, #000000 40%, #000000 80%);">
                                             <a>
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-gear"></i><b>SETTINGS</b></span></a>
                                         </li>
@@ -294,15 +294,15 @@
                             <tr>
                                 <th width="25%" class="text-center">
                                     <ul class="row text-center list-inline  wowload bounceInUp collapse" id="settings">
-                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                        <li style="background: linear-gradient(110deg, #000000 20%, #000000 40%, #000000 80%);">
                                             <a href="<?php echo site_url('admin/menu');?>">
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-bars"></i><b>MENU</b></span></a>
                                         </li>
-                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                        <li style="background: linear-gradient(110deg, #000000 20%, #000000 40%, #000000 80%);">
                                             <a href="<?php echo site_url('admin/admin_access');?>">
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-eye"></i><b>ADMIN<br />ACCESS</b></span></a>
                                         </li>
-                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                        <li style="background: linear-gradient(110deg, #000000 20%, #000000 40%, #000000 80%);">
                                             <a href="<?php echo site_url('admin/admin');?>">
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-user-secret"></i><b>ADMIN</b></span></a>
                                         </li>
