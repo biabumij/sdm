@@ -62,7 +62,7 @@
 											<div class="col-sm-2">
 													<label>Tanggal Absensi</label>
 												</div>	
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<input type="date" class="form-control" name="date" required="">
 											</div>
 											<br />
@@ -70,7 +70,7 @@
 											<div class="col-sm-2">
 												<label>Clock-In</label>
 											</div>	
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<input type="time" class="form-control" name="clock_in" required="">
 											</div>
 											<br />
@@ -78,7 +78,7 @@
 											<div class="col-sm-2">
 												<label>Clock-Out</label>
 											</div>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<input type="time" class="form-control" name="clock_out" required="">
 											</div>
 											<br />
