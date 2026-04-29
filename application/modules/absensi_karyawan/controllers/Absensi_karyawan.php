@@ -106,7 +106,7 @@ class Absensi_karyawan extends Secure_Controller {
             $this->db->where('date <=', date('Y-m-d G:i:s', strtotime($end_date.' 23:59:59')));
 		}
         $this->db->select('*, date as date_pengajuan');
-		//$this->db->where('nama_pegawai',$id);
+		$this->db->where('nama_pegawai',$id);
 		$this->db->order_by('date','desc');
 		$query = $this->db->get('pengajuan_absensi');
 		
