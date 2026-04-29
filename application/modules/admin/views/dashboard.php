@@ -255,7 +255,7 @@
                                     <ul class="row text-center list-inline  wowload bounceIn">
                                         <li style="background: linear-gradient(110deg, #666666 20%, #666666 40%, #666666 80%);">
                                             <a href="<?php echo site_url('admin/absensi_karyawan_all');?>">
-                                            <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>DATA ABSENSI (PUSAT)</b></span></a>
+                                            <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>REKAP ABSENSI (ALL)</b></span></a>
                                         </li>
                                     </ul>
                                 </th>
@@ -263,7 +263,7 @@
                                     <ul class="row text-center list-inline  wowload bounceIn">
                                         <li style="background: linear-gradient(110deg, #666666 20%, #666666 40%, #666666 80%);">
                                             <a href="<?php echo site_url('admin/absensi');?>">
-                                            <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>LAPORAN (PUSAT)</b></span></a>
+                                            <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>LAPORAN (ALL)</b></span></a>
                                         </li>
                                     </ul>
                                 </th>
