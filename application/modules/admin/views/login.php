@@ -47,6 +47,16 @@
 				margin: 0 auto;
 			}
 
+			#toggleEmail {
+				position: absolute;
+				right: 15px; 
+				top: 35%;
+				transform: translateY(-50%);
+				z-index: 100; /* Pastikan ikon di atas */
+				color: #666;
+				width: 20px; /* Batasi lebar ikon agar tidak menutupi seluruh kolom */
+			}
+
 			#togglePassword {
 				position: absolute;
 				right: 15px; 
@@ -88,7 +98,7 @@
 											<div class="form-group">
 												<span class="input-with-icon">
 													<input type="email" class="form-control-login" id="email" placeholder="Email" name="email" value="<?= $email;?>">
-													<i class="fa fa-envelope" id="togglePassword" ></i>
+													<i class="fa fa-envelope" id="toggleEmail" ></i>
 												</span>
 											</div>
 											<div class="form-group">
