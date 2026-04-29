@@ -85,10 +85,10 @@
 											<div class="alert-content"></div>
 										</div>
 										<form id="loginform" action="<?php echo site_url('login_admin');?>">
-											<div class="form-group mt-md">
+											<div class="form-group">
 												<span class="input-with-icon">
 													<input type="email" class="form-control-login" id="email" placeholder="Email" name="email" value="<?= $email;?>">
-													<i class="fa fa-envelope"></i>
+													<i class="fa fa-envelope" id="togglePassword" ></i>
 												</span>
 											</div>
 											<div class="form-group">
