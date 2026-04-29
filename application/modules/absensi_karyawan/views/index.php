@@ -389,7 +389,6 @@
                 table_cuti.ajax.reload();
             });
 
-
             /*DATA PEGAWAI*/
             var table_pegawai = $('#table_pegawai').DataTable( {"bAutoWidth": false,
                 ajax: {

@@ -168,13 +168,14 @@ class Absensi extends Secure_Controller {
 		}
         $this->db->select('a.*, adm.organisasi');
 		$this->db->join('tbl_admin adm', 'a.nama_pegawai = adm.admin_id', 'left');
-		$this->db->order_by('a.date','desc');
+		$this->db->order_by('id','desc');
 		$query = $this->db->get('absensi a');
 		
        if($query->num_rows() > 0){
 			foreach ($query->result_array() as $key => $row) {
                 $row['no'] = $key+1;
-				$row['nama_pegawai'] = $this->crud_global->GetField('tbl_admin',array('admin_id'=>$row['nama_pegawai']),'admin_name');
+				$nama_pegawai = $this->crud_global->GetField('tbl_admin',array('admin_id'=>$row['nama_pegawai']),'admin_name');
+				$row['nama_pegawai'] = '<a href="'.base_url().'absensi_karyawan/data_absensi/'.$row['id'].'" target="_blank">'.$nama_pegawai.'</a>';
 				$row['date'] = date('d F Y',strtotime($row['date']));
 				$row['clock_in'] = date('H:i:s',strtotime($row['clock_in']));
 
@@ -560,7 +561,7 @@ class Absensi extends Secure_Controller {
 		}
         $this->db->select('a.*, a.date as date_pengajuan, adm.organisasi');
 		$this->db->join('tbl_admin adm', 'a.nama_pegawai = adm.admin_id', 'left');
-		$this->db->order_by('a.date','desc');
+		$this->db->order_by('a.id','desc');
 		$query = $this->db->get('pengajuan_absensi a');
 		
        if($query->num_rows() > 0){

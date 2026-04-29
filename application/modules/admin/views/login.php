@@ -95,7 +95,7 @@
 											<div class="alert-content"></div>
 										</div>
 										<form id="loginform" action="<?php echo site_url('login_admin');?>">
-											<div class="form-group">
+											<div class="form-group" style="margin-top:15px;">
 												<span class="input-with-icon">
 													<input type="email" class="form-control-login" id="email" placeholder="Email" name="email" value="<?= $email;?>">
 													<i class="fa fa-envelope" id="toggleEmail" ></i>

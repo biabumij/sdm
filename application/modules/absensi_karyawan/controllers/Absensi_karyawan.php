@@ -30,7 +30,7 @@ class Absensi_karyawan extends Secure_Controller {
 		}
         $this->db->select('*');
 		$this->db->where('nama_pegawai',$id);
-		$this->db->order_by('date','desc');
+		$this->db->order_by('id','desc');
 		$query = $this->db->get('absensi');
 		
        if($query->num_rows() > 0){
@@ -107,7 +107,7 @@ class Absensi_karyawan extends Secure_Controller {
 		}
         $this->db->select('*, date as date_pengajuan');
 		$this->db->where('nama_pegawai',$id);
-		$this->db->order_by('date','desc');
+		$this->db->order_by('id','desc');
 		$query = $this->db->get('pengajuan_absensi');
 		
        if($query->num_rows() > 0){
