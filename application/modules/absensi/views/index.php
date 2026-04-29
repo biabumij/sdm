@@ -75,8 +75,8 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                                 <div class="panel-content">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li role="presentation" class="active"><a href="#absen" aria-controls="absen" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">ABSENSI PEGAWAI</a></li>
-                                        <li role="presentation"><a href="#cuti" aria-controls="cuti" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">CUTI PEGAWAI</a></li>
                                         <li role="presentation"><a href="#pengajuan_absensi" aria-controls="cuti" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">PENGAJUAN ABSENSI PEGAWAI</a></li>
+                                        <!--<li role="presentation"><a href="#cuti" aria-controls="cuti" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">CUTI PEGAWAI</a></li>-->
                                     </ul>
                                     <div class="tab-content">
                                     <br />
@@ -125,48 +125,6 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                                             </div>
                                         </div>
 
-                                        <div role="tabpanel" class="tab-pane" id="cuti">
-                                            <form action="<?php echo site_url('absensi/cetak_cuti');?>" target="_blank">
-                                                <div class="col-sm-3">
-                                                    <input type="text" id="filter_date_cuti" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <select id="filter_organisasi_cuti" name="filter_organisasi" class="form-control select2">
-                                                        <option value="">Pilih Organisasi</option>
-                                                        <?php
-                                                        foreach ($organisasi as $key => $og) {
-                                                            ?>
-                                                            <option value="<?php echo $og['organisasi'];?>"><?php echo $og['organisasi'];?></option>
-                                                            <?php
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                <!--<div class="col-sm-3">
-                                                    <button type="submit" class="btn btn-default" style="border-radius:10px; font-weight:bold;">PRINT</button>
-                                                </div>-->
-                                            </form>
-                                            <br />
-                                            <br />
-                                            <div class="table-responsive">
-                                                <table class="table table-striped table-hover" id="table_cuti" style="width:100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Nama Pegawai</th>
-                                                            <th>File</th>
-                                                            <th>Status</th>
-                                                            <th class="text_center">Setujui</th>
-                                                            <th class="text_center">Tolak</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
                                         <div role="tabpanel" class="tab-pane" id="pengajuan_absensi">
                                             <form action="<?php echo site_url('absensi/cetak_pengajuan_absensi');?>" target="_blank">
                                                 <div class="col-sm-3">
@@ -201,6 +159,48 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                                                             <th>Clock-In</th>
                                                             <th>Clock-Out</th>
                                                             <th>Alasan</th>
+                                                            <th class="text_center">Setujui</th>
+                                                            <th class="text_center">Tolak</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div role="tabpanel" class="tab-pane" id="cuti">
+                                            <form action="<?php echo site_url('absensi/cetak_cuti');?>" target="_blank">
+                                                <div class="col-sm-3">
+                                                    <input type="text" id="filter_date_cuti" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <select id="filter_organisasi_cuti" name="filter_organisasi" class="form-control select2">
+                                                        <option value="">Pilih Organisasi</option>
+                                                        <?php
+                                                        foreach ($organisasi as $key => $og) {
+                                                            ?>
+                                                            <option value="<?php echo $og['organisasi'];?>"><?php echo $og['organisasi'];?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <!--<div class="col-sm-3">
+                                                    <button type="submit" class="btn btn-default" style="border-radius:10px; font-weight:bold;">PRINT</button>
+                                                </div>-->
+                                            </form>
+                                            <br />
+                                            <br />
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover" id="table_cuti" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Nama Pegawai</th>
+                                                            <th>File</th>
+                                                            <th>Status</th>
                                                             <th class="text_center">Setujui</th>
                                                             <th class="text_center">Tolak</th>
                                                         </tr>
@@ -325,59 +325,6 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
                 });
             }
 
-            /*CUTI*/
-            var table_cuti = $('#table_cuti').DataTable( {"bAutoWidth": false,
-                ajax: {
-                    processing: true,
-                    serverSide: true,
-                    url: '<?php echo site_url('absensi/table_cuti'); ?>',
-                    type: 'POST',
-                    data: function(d) {
-                        d.filter_date = $('#filter_date_cuti').val();
-                        d.filter_organisasi = $('#filter_organisasi_cuti').val();
-                    }
-                },
-                responsive: true,
-                paging : false,
-                "deferRender": true,
-                "language": {
-                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
-                },
-                columns: [
-                    {
-                        "data": "no"
-                    },
-                    {
-                        "data": "nama_pegawai"
-                    },
-                    {
-                        "data": "lampiran"
-                    },
-                    {
-                        "data": "status"
-                    },
-                    {
-                        "data": "approve"
-                    },
-                    {
-                        "data": "reject"
-                    },
-                ],
-                "columnDefs": [
-                    { "width": "5%", "targets": 0, "className": 'text-center'},
-                    { "width": "10%", "targets": [4,5], "className": 'text-center'},
-                ],
-            });
-
-            $('#filter_date_cuti').on('apply.daterangepicker', function(ev, picker) {
-                $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
-                table_cuti.ajax.reload();
-            });
-
-            $('#filter_organisasi_cuti').change(function(){
-                table_cuti.ajax.reload();
-            });
-
             /*PENGAJUAN ABSENSI*/
             var table_pengajuan_absensi = $('#table_pengajuan_absensi').DataTable( {"bAutoWidth": false,
                 ajax: {
@@ -438,6 +385,59 @@ if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
 
             $('#filter_pengajuan_absensi').change(function(){
                 table_pengajuan_absensi.ajax.reload();
+            });
+
+            /*CUTI*/
+            var table_cuti = $('#table_cuti').DataTable( {"bAutoWidth": false,
+                ajax: {
+                    processing: true,
+                    serverSide: true,
+                    url: '<?php echo site_url('absensi/table_cuti'); ?>',
+                    type: 'POST',
+                    data: function(d) {
+                        d.filter_date = $('#filter_date_cuti').val();
+                        d.filter_organisasi = $('#filter_organisasi_cuti').val();
+                    }
+                },
+                responsive: true,
+                paging : false,
+                "deferRender": true,
+                "language": {
+                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+                },
+                columns: [
+                    {
+                        "data": "no"
+                    },
+                    {
+                        "data": "nama_pegawai"
+                    },
+                    {
+                        "data": "lampiran"
+                    },
+                    {
+                        "data": "status"
+                    },
+                    {
+                        "data": "approve"
+                    },
+                    {
+                        "data": "reject"
+                    },
+                ],
+                "columnDefs": [
+                    { "width": "5%", "targets": 0, "className": 'text-center'},
+                    { "width": "10%", "targets": [4,5], "className": 'text-center'},
+                ],
+            });
+
+            $('#filter_date_cuti').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
+                table_cuti.ajax.reload();
+            });
+
+            $('#filter_organisasi_cuti').change(function(){
+                table_cuti.ajax.reload();
             });
         </script>
     </body>

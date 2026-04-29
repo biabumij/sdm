@@ -36,7 +36,8 @@ class Absensi_karyawan extends Secure_Controller {
        if($query->num_rows() > 0){
 			foreach ($query->result_array() as $key => $row) {
                 $row['no'] = $key+1;
-				$row['nama_pegawai'] = $this->crud_global->GetField('tbl_admin',array('admin_id'=>$row['nama_pegawai']),'admin_name');
+				$nama_pegawai = $this->crud_global->GetField('tbl_admin',array('admin_id'=>$row['nama_pegawai']),'admin_name');
+				$row['nama_pegawai'] = '<a href="'.base_url().'absensi_karyawan/data_absensi/'.$row['id'].'" target="_blank">'.$nama_pegawai.'</a>';
 				$row['date'] = date('d F Y',strtotime($row['date']));
 				$row['clock_in'] = date('H:i:s',strtotime($row['clock_in']));
 
@@ -105,7 +106,7 @@ class Absensi_karyawan extends Secure_Controller {
             $this->db->where('date <=', date('Y-m-d G:i:s', strtotime($end_date.' 23:59:59')));
 		}
         $this->db->select('*, date as date_pengajuan');
-		$this->db->where('nama_pegawai',$id);
+		//$this->db->where('nama_pegawai',$id);
 		$this->db->order_by('date','desc');
 		$query = $this->db->get('pengajuan_absensi');
 		
@@ -273,6 +274,25 @@ class Absensi_karyawan extends Secure_Controller {
         $pdf->nsi_html($html);
         $pdf->Output('data_pegawai'.'.pdf', 'I');
 	}
+
+	public function data_absensi($id)
+    {
+        $check = $this->m_admin->check_login();
+        if($check == true){
+
+            $this->db->select('*');
+            $this->db->where('id',$id);
+            $query = $this->db->get('absensi');
+            $data['row'] = $query->row_array();
+			file_put_contents("c:/users/ginan/Desktop/test.txt", $this->db->last_query());
+
+
+            $this->load->view('absensi_karyawan/data_absensi',$data);
+            
+        }else {
+            redirect('admin');
+        }
+    }
 
 }
 ?>

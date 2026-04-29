@@ -27,6 +27,27 @@
 				color: #ffffff;
 				font-weight: bold;
 			}
+
+			#togglePassword {
+				position: absolute;
+				right: 15px; 
+				top: 35%;
+				transform: translateY(-50%);
+				z-index: 100; /* Pastikan ikon di atas */
+				color: #666;
+				cursor: pointer;
+				width: 20px; /* Batasi lebar ikon agar tidak menutupi seluruh kolom */
+			}
+
+			.form-control-login {
+				position: relative;
+				z-index: 1; /* Input di bawah ikon */
+				padding-right: 45px !important; /* Beri ruang agar teks tidak tertumpuk mata */
+			}
+
+			#togglePassword {
+				pointer-events: auto; /* Pastikan ikon bisa diklik */
+			}
 	    	<?php include "assets/back/theme/stylesheets/css/style.css" ?>
 	    </style>
 	</head>
@@ -55,7 +76,7 @@
 											<div class="form-group">
 												<span class="input-with-icon">
 													<input type="password" class="form-control-login" id="password" placeholder="Password" name="password">
-													<i class="fa fa-key"></i>
+													<right><i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i></right>
 												</span>
 											</div>
 											<div class="form-group" style="margin:auto; width:auto;">
@@ -144,6 +165,23 @@
 					});
 					return false;
 				}
+			});
+			$("#togglePassword").click(function () {
+			// Ambil elemen input password
+			var passwordInput = $("#password");
+
+			// Cek tipe inputnya
+			if (passwordInput.attr("type") == "password") {
+			// Jika password, ubah jadi text (unhide)
+			passwordInput.attr("type", "text");
+			// Ubah ikon jadi mata tertutup
+			$(this).removeClass("fa-eye").addClass("fa-eye-slash");
+			} else {
+			// Jika text, kembalikan jadi password (hide)
+			passwordInput.attr("type", "password");
+			// Ubah ikon jadi mata terbuka
+			$(this).removeClass("fa-eye-slash").addClass("fa-eye");
+			}
 			});
 		});
 		</script>

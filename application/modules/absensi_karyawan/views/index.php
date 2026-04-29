@@ -72,9 +72,9 @@
                                 <div class="panel-content">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li role="presentation" class="active"><a href="#absensi" aria-controls="absensi" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">ABSENSI</a></li>
-                                        <li role="presentation"><a href="#cuti" aria-controls="cuti" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">CUTI</a></li>
                                         <li role="presentation"><a href="#pengajuan_absensi" aria-controls="pengajuan_absensi" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">PENGAJUAN ABSENSI</a></li>
-                                        <li role="presentation"><a href="#data_pegawai" aria-controls="data_pegawai" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">DATA PEGAWAI</a></li>
+                                        <!--<li role="presentation"><a href="#cuti" aria-controls="cuti" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">CUTI</a></li>
+                                        <li role="presentation"><a href="#data_pegawai" aria-controls="data_pegawai" role="tab" data-toggle="tab" style="border-radius:10px; font-weight:bold;">DATA PEGAWAI</a></li>-->
                                     </ul>
                                     <div class="tab-content">
                                     <br />
@@ -107,34 +107,6 @@
                                             </div>
                                         </div>
 
-                                        <div role="tabpanel" class="tab-pane" id="cuti">
-                                            <form action="<?php echo site_url('absensi/cetak_cuti');?>" target="_blank">
-                                                <div class="col-sm-3">
-                                                    <input type="text" id="filter_date_cuti" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
-                                                </div>
-                                                <!--<div class="col-sm-3">
-                                                    <button type="submit" class="btn btn-default" style="border-radius:10px; font-weight:bold;">PRINT</button>
-                                                </div>-->
-                                            </form>
-                                            <br />
-                                            <br />
-                                            <div class="table-responsive">
-                                                <table class="table table-striped table-hover" id="table_cuti" style="width:100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Nama Pegawai</th>
-                                                            <th>File</th>
-                                                            <th>Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
                                         <div role="tabpanel" class="tab-pane" id="pengajuan_absensi">
                                             <form action="<?php echo site_url('absensi/cetak_pengajuan_absensi');?>" target="_blank">
                                                 <div class="col-sm-3">
@@ -157,6 +129,34 @@
                                                             <th>Clock-In</th>
                                                             <th>Clock-Out</th>
                                                             <th>Alasan</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div role="tabpanel" class="tab-pane" id="cuti">
+                                            <form action="<?php echo site_url('absensi/cetak_cuti');?>" target="_blank">
+                                                <div class="col-sm-3">
+                                                    <input type="text" id="filter_date_cuti" name="filter_date" class="form-control dtpickerange" autocomplete="off" placeholder="Filter By Date">
+                                                </div>
+                                                <!--<div class="col-sm-3">
+                                                    <button type="submit" class="btn btn-default" style="border-radius:10px; font-weight:bold;">PRINT</button>
+                                                </div>-->
+                                            </form>
+                                            <br />
+                                            <br />
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover" id="table_cuti" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Nama Pegawai</th>
+                                                            <th>File</th>
+                                                            <th>Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -297,7 +297,58 @@
                 });
             }
 
-             /*CUTI*/
+            /*PENGAJUAN ABSENSI*/
+            var table_pengajuan_absensi = $('#table_pengajuan_absensi').DataTable( {"bAutoWidth": false,
+                ajax: {
+                    processing: true,
+                    serverSide: true,
+                    url: '<?php echo site_url('absensi_karyawan/table_pengajuan_absensi'); ?>',
+                    type: 'POST',
+                    data: function(d) {
+                        d.filter_date = $('#filter_date_pengajuan_absensi').val();
+                    }
+                },
+                responsive: true,
+                paging : false,
+                "deferRender": true,
+                "language": {
+                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+                },
+                columns: [
+                    {
+                        "data": "no"
+                    },
+                    {
+                        "data": "nama_pegawai"
+                    },
+                    {
+                        "data": "date"
+                    },
+                    {
+                        "data": "status"
+                    },
+                    {
+                        "data": "clock_in"
+                    },
+                    {
+                        "data": "clock_out"
+                    },
+                    {
+                        "data": "reason"
+                    },
+
+                ],
+                "columnDefs": [
+                    { "width": "5%", "targets": 0, "className": 'text-center'},
+                ],
+            });
+
+            $('#filter_date_pengajuan_absensi').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
+                table_pengajuan_absensi.ajax.reload();
+            });
+
+            /*CUTI*/
             var table_cuti = $('#table_cuti').DataTable( {"bAutoWidth": false,
                 ajax: {
                     processing: true,
@@ -338,55 +389,6 @@
                 table_cuti.ajax.reload();
             });
 
-            /*PENGAJUAN ABSENSI*/
-            var table_pengajuan_absensi = $('#table_pengajuan_absensi').DataTable( {"bAutoWidth": false,
-                ajax: {
-                    processing: true,
-                    serverSide: true,
-                    url: '<?php echo site_url('absensi_karyawan/table_pengajuan_absensi'); ?>',
-                    type: 'POST',
-                    data: function(d) {
-                        d.filter_date = $('#filter_date_pengajuan_absensi').val();
-                    }
-                },
-                responsive: true,
-                paging : false,
-                "deferRender": true,
-                "language": {
-                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
-                },
-                columns: [
-                    {
-                        "data": "no"
-                    },
-                    {
-                        "data": "nama_pegawai"
-                    },
-                    {
-                        "data": "date"
-                    },
-                    {
-                        "data": "status"
-                    },
-                    {
-                        "data": "clock_in"
-                    },
-                    {
-                        "data": "clock_out"
-                    },
-                    {
-                        "data": "reason"
-                    },
-                ],
-                "columnDefs": [
-                    { "width": "5%", "targets": 0, "className": 'text-center'},
-                ],
-            });
-
-            $('#filter_date_pengajuan_absensi').on('apply.daterangepicker', function(ev, picker) {
-                $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
-                table_pengajuan_absensi.ajax.reload();
-            });
 
             /*DATA PEGAWAI*/
             var table_pegawai = $('#table_pegawai').DataTable( {"bAutoWidth": false,

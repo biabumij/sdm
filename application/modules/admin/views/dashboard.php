@@ -147,7 +147,7 @@
                     <?php
                     if(in_array($this->session->userdata('admin_group_id'), array(1,2,3))){
                     ?>
-                    <div class="col-sm-12" style="background-image:linear-gradient(to right,#0B5394 0%,#23649e 51%,#0B5394 100%); font-size:18px; border-radius: 10px; padding:10px; margin-bottom:50px;">
+                    <!--<div class="col-sm-12" style="background-image:linear-gradient(to right,#0B5394 0%,#23649e 51%,#0B5394 100%); font-size:18px; border-radius: 10px; padding:10px; margin-bottom:50px;">
                         <p style="text-align:center; font-weight:bold; color:white;">BUTUH PERSETUJUAN</p>
                         <figure class="highcharts-figure">
                             <?php
@@ -182,152 +182,141 @@
                             }
                             ?>
                         </figure>
+                    </div>-->
+                    <?php
+                    }
+                    ?>        
+                    <div class="process">
+                        <table width="100%" style="margin-top:100px;">
+                            <tr>
+                                <th width="25%"></th>
+                                <th width="25%" class="text-center" data-toggle="collapse" data-target="#absensi" aria-expanded="false" aria-controls="absensi">
+                                    <ul class="row text-center list-inline  wowload bounceIn">
+                                        <li style="background: linear-gradient(110deg, #00B300 20%, #00B300 40%, #00B300 80%);">
+                                            <a href="<?php echo site_url('absensi/form_absensi');?>">
+                                            <span style="color:#fffdd0;"><i class="fa-regular fa-clock"></i><b>CLOCK IN</b></span></a>
+                                        </li>
+                                    </ul>
+                                </th>
+                                <th width="25%" class="text-center" data-toggle="collapse" data-target="#absensi" aria-expanded="false" aria-controls="absensi">
+                                    <ul class="row text-center list-inline  wowload bounceIn">
+                                        <li style="background: linear-gradient(110deg, #cc0000 20%, #cc0000 40%, #cc0000 80%);">
+                                            <a href="<?php echo site_url('absensi/form_absensi_out');?>">
+                                            <span style="color:#fffdd0;"><i class="fa-regular fa-clock"></i><b>CLOCK OUT</b></span></a>
+                                        </li>
+                                    </ul>
+                                </th>
+                                <th width="25%"></th>
+                                <!--<th width="25%" class="text-center" data-toggle="collapse" data-target="#cuti" aria-expanded="false" aria-controls="cuti">
+                                    <ul class="row text-center list-inline  wowload bounceIn">
+                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                            <a href="<?php echo site_url('absensi/form_cuti');?>">
+                                            <span style="color:#fffdd0;"><i class="fa-regular fa-calendar-days"></i><b>CUTI</b></span></a>
+                                        </li>
+                                    </ul>
+                                </th>-->
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="process">
+                        <table width="100%">
+                            <tr>
+                                <th width="25%"></th>
+                                <th width="25%" class="text-center" data-toggle="collapse" data-target="#pengajuan" aria-expanded="false" aria-controls="pengajuan">
+                                    <ul class="row text-center list-inline  wowload bounceIn">
+                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                            <a href="<?php echo site_url('absensi/form_pengajuan_absensi');?>">
+                                            <span style="color:#fffdd0;"><i class="fa-solid fa-screwdriver-wrench"></i><b>LUPA ABSENSI</b></span></a>
+                                        </li>
+                                    </ul>
+                                </th>
+                                <th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
+                                    <ul class="row text-center list-inline  wowload bounceIn">
+                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                            <a href="<?php echo site_url('admin/absensi_karyawan');?>">
+                                            <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>DATA ABSENSI</b></span></a>
+                                        </li>
+                                    </ul>
+                                </th>
+                                <th width="25%"></th>
+                            </tr>                                    
+                        </table>
+                    </div>
+
+                    <?php
+                    if(in_array($this->session->userdata('admin_group_id'), array(1,2,3))){
+                    ?>
+                    <div class="process">
+                        <table width="100%">
+                            <tr>
+                                <th width="25%"></th>
+                                <th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
+                                    <ul class="row text-center list-inline  wowload bounceIn">
+                                        <li style="background: linear-gradient(110deg, #666666 20%, #666666 40%, #666666 80%);">
+                                            <a href="<?php echo site_url('admin/absensi');?>">
+                                            <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>LAPORAN (PUSAT)</b></span></a>
+                                        </li>
+                                    </ul>
+                                </th>
+                                <!--<th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
+                                    <ul class="row text-center list-inline  wowload bounceIn">
+                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                            <a href="<?php echo site_url('admin/data_pegawai');?>">
+                                            <span style="color:#fffdd0;"><i class="fa-solid fa-users"></i><b>DATA PEGAWAI</b></span></a>
+                                        </li>
+                                    </ul>
+                                </th>-->
+                                <?php
+                                if(in_array($this->session->userdata('admin_group_id'), array(1))){
+                                ?>
+                                <th width="25%" class="text-center" data-toggle="collapse" data-target="#settings" aria-expanded="false" aria-controls="beton">
+                                    <ul class="row text-center list-inline  wowload bounceIn">
+                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                            <a>
+                                            <span style="color:#fffdd0;"><i class="fa-solid fa-gear"></i><b>SETTINGS</b></span></a>
+                                        </li>
+                                    </ul>
+                                </th>
+                                <?php
+                                }
+                                ?>
+                                <th width="25%"></th>
+                            </tr>                                    
+                        </table>
+                        <table width="100%">
+                            <tr>
+                                <th width="8.5%" class="text-center"></th>
+                                <th width="25%" class="text-center">
+                                    <ul class="row text-center list-inline  wowload bounceInUp collapse" id="settings">
+                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                            <a href="<?php echo site_url('admin/menu');?>">
+                                            <span style="color:#fffdd0;"><i class="fa-solid fa-bars"></i><b>MENU</b></span></a>
+                                        </li>
+                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                            <a href="<?php echo site_url('admin/admin_access');?>">
+                                            <span style="color:#fffdd0;"><i class="fa-solid fa-eye"></i><b>ADMIN<br />ACCESS</b></span></a>
+                                        </li>
+                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                            <a href="<?php echo site_url('admin/admin');?>">
+                                            <span style="color:#fffdd0;"><i class="fa-solid fa-user-secret"></i><b>ADMIN</b></span></a>
+                                        </li>
+                                    </ul>
+                                </th>
+                            </tr>
+                        </table>
                     </div>
                     <?php
                     }
                     ?>
-                    <div id="flippy_menu">
-                        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler_menu') .style.display=='none') {document.getElementById('spoiler_menu') .style.display=''}else{document.getElementById('spoiler_menu') .style.display='none'}"><i class="fa-regular fa-hand-point-right"></i> MENU USERS (SHOW/HIDE)</button>
-                    </div>
-                    <div id="spoiler_menu" style="display:block">        
-                        <div class="process">
-                            <table width="100%" style="margin-top:100px;">
-                                <tr>
-                                    <th width="25%" class="text-center" data-toggle="collapse" data-target="#absensi" aria-expanded="false" aria-controls="absensi">
-                                        <ul class="row text-center list-inline  wowload bounceIn">
-                                            <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
-                                                <a href="<?php echo site_url('absensi/form_absensi');?>">
-                                                <span style="color:#fffdd0;"><i class="fa-regular fa-clock"></i><b>ABSENSI</b></span></a>
-                                            </li>
-                                        </ul>
-                                    </th>
-                                    <th width="25%" class="text-center" data-toggle="collapse" data-target="#cuti" aria-expanded="false" aria-controls="cuti">
-                                        <ul class="row text-center list-inline  wowload bounceIn">
-                                            <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
-                                                <a href="<?php echo site_url('absensi/form_cuti');?>">
-                                                <span style="color:#fffdd0;"><i class="fa-regular fa-calendar-days"></i><b>CUTI</b></span></a>
-                                            </li>
-                                        </ul>
-                                    </th>
-                                    <th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
-                                        <ul class="row text-center list-inline  wowload bounceIn">
-                                            <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
-                                                <a href="<?php echo site_url('admin/absensi_karyawan');?>">
-                                                <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>DATA</b></span></a>
-                                            </li>
-                                        </ul>
-                                    </th>
-                                    <th width="25%" class="text-center" data-toggle="collapse" data-target="#pengajuan" aria-expanded="false" aria-controls="pengajuan">
-                                        <ul class="row text-center list-inline  wowload bounceIn">
-                                            <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
-                                                <a>
-                                                <span style="color:#fffdd0;"><i class="fa-solid fa-screwdriver-wrench"></i><b>PENGAJUAN</b></span></a>
-                                            </li>
-                                        </ul>
-                                    </th>
-                                </tr>
-                            </table>
-                            <table width="100%">
-                                <tr>
-                                    <th width="25%" class="text-center"></th>
-                                    <th width="25%" class="text-center"></th>
-                                    <th width="25%" class="text-center"></th>
-                                    <th width="25%" class="text-center">
-                                        <ul class="row text-center list-inline  wowload bounceInUp collapse" id="pengajuan">
-                                            <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
-                                                <a href="<?php echo site_url('absensi/form_pengajuan_absensi');?>">
-                                                <span style="color:#fffdd0;"><i class="fa-solid fa-dollar-sign"></i><b>ABSENSI</b></span></a>
-                                            </li>
-                                        </ul>
-                                    </th>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <?php
-                    if(in_array($this->session->userdata('admin_group_id'), array(1,3,7))){
-                    ?>
-                    <div id="flippy">
-                        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}"><i class="fa-regular fa-hand-point-right"></i>  MENU ADMIN (SHOW/HIDE)</button>
-                    </div>
-                    <div id="spoiler" style="display:block">        
-                         <div class="process">
-                            <table width="100%" style="margin-top:100px;">
-                                <tr>
-                                    <?php
-                                    if(in_array($this->session->userdata('admin_group_id'), array(2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22))){
-                                    ?>
-                                    <th width="25%"></th>
-                                    <?php
-                                    }
-                                    ?>
-                                    <th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
-                                        <ul class="row text-center list-inline  wowload bounceIn">
-                                            <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
-                                                <a href="<?php echo site_url('admin/absensi');?>">
-                                                <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>LAPORAN</b></span></a>
-                                            </li>
-                                        </ul>
-                                    </th>
-                                    <th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
-                                        <ul class="row text-center list-inline  wowload bounceIn">
-                                            <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
-                                                <a href="<?php echo site_url('admin/data_pegawai');?>">
-                                                <span style="color:#fffdd0;"><i class="fa-solid fa-users"></i><b>DATA PEGAWAI</b></span></a>
-                                            </li>
-                                        </ul>
-                                    </th>
-                                    <?php
-                                    if(in_array($this->session->userdata('admin_group_id'), array(2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22))){
-                                    ?>
-                                    <th width="25%"></th>
-                                    <?php
-                                    }
-                                    ?>
 
-                                    <?php
-                                    if(in_array($this->session->userdata('admin_group_id'), array(1))){
-                                    ?>
-                                    <th width="25%" class="text-center" data-toggle="collapse" data-target="#settings" aria-expanded="false" aria-controls="beton">
-                                        <ul class="row text-center list-inline  wowload bounceIn">
-                                            <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
-                                                <a>
-                                                <span style="color:#fffdd0;"><i class="fa-solid fa-gear"></i><b>SETTINGS</b></span></a>
-                                            </li>
-                                        </ul>
-                                    </th>
-                                    <?php
-                                    }
-                                    ?>
-                                </tr>                                    
-                            </table>
-                            <?php
-                            }
-                            ?>
-                            <table width="100%">
-                                <tr>
-                                    <th width="25%" class="text-center"></th>
-                                    <th width="25%" class="text-center"></th>
-                                    <th width="25%" class="text-center">
-                                        <ul class="row text-center list-inline  wowload bounceInUp collapse" id="settings">
-                                            <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
-                                                <a href="<?php echo site_url('admin/menu');?>">
-                                                <span style="color:#fffdd0;"><i class="fa-solid fa-bars"></i><b>MENU</b></span></a>
-                                            </li>
-                                            <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
-                                                <a href="<?php echo site_url('admin/admin_access');?>">
-                                                <span style="color:#fffdd0;"><i class="fa-solid fa-eye"></i><b>ADMIN<br />ACCESS</b></span></a>
-                                            </li>
-                                            <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
-                                                <a href="<?php echo site_url('admin/admin');?>">
-                                                <span style="color:#fffdd0;"><i class="fa-solid fa-user-secret"></i><b>ADMIN</b></span></a>
-                                            </li>
-                                        </ul>
-                                    </th>
-                                </tr>
-                            </table>
-                        </div>
+                    <div class="process">
+                        <table width="100%">
+                            <tr>
+                                
+                            </tr>                                    
+                        </table>
+                        
                     </div>
                 </div> 
             </div>

@@ -27,11 +27,38 @@ class Absensi extends Secure_Controller {
 	
 	public function submit_clock_in()
 	{
+		$lat = $this->input->post('lat');
+		$lon = $this->input->post('lon');
+		$image = $this->input->post('image_data');
+
+		$nama_file_foto = null;
+		if (!empty($image)) {
+			// Hapus header string Base64 (data:image/jpeg;base64,...)
+			$image_parts = explode(";base64,", $image);
+			$image_type_aux = explode("image/", $image_parts[0]);
+			$image_type = $image_type_aux[1];
+			$image_base64 = base64_decode($image_parts[1]);
+
+			// Buat nama file unik (Contoh: selfie_123456789.jpg)
+			$nama_file_foto = 'selfie_' . uniqid() . '.' . $image_type;
+			$folder_path = './uploads/absensi/';
+			$file_path = $folder_path . $nama_file_foto;
+
+			// Simpan file ke folder server
+			if (!file_exists($folder_path)) {
+				mkdir($folder_path, 0777, true);
+			}
+			file_put_contents($file_path, $image_base64);
+		}
+
 		$date = date('Y-m-d');
 		$created_by = $this->session->userdata('admin_id');
         $created_on = date('H:i:s');
 
 		$arr_insert = array(
+			'lat' => $lat,
+			'lon' => $lon,
+			'foto' => $nama_file_foto,
 			'nama_pegawai' => $created_by,
 			'date' => $date,
 			'clock_in' => $created_on,
@@ -55,8 +82,42 @@ class Absensi extends Secure_Controller {
 		}
 	}
 
+	public function form_absensi_out()
+	{
+		$check = $this->m_admin->check_login();
+		if ($check == true) {
+			$this->load->view('absensi/form_absensi_out', $data);
+		} else {
+			redirect('admin');
+		}
+	}
+
 	public function submit_clock_out()
 	{
+		$lat = $this->input->post('lat');
+		$lon = $this->input->post('lon');
+		$image = $this->input->post('image_data');
+
+		$nama_file_foto = null;
+		if (!empty($image)) {
+			// Hapus header string Base64 (data:image/jpeg;base64,...)
+			$image_parts = explode(";base64,", $image);
+			$image_type_aux = explode("image/", $image_parts[0]);
+			$image_type = $image_type_aux[1];
+			$image_base64 = base64_decode($image_parts[1]);
+
+			// Buat nama file unik (Contoh: selfie_123456789.jpg)
+			$nama_file_foto = 'selfie_' . uniqid() . '.' . $image_type;
+			$folder_path = './uploads/absensi_out/';
+			$file_path = $folder_path . $nama_file_foto;
+
+			// Simpan file ke folder server
+			if (!file_exists($folder_path)) {
+				mkdir($folder_path, 0777, true);
+			}
+			file_put_contents($file_path, $image_base64);
+		}
+		
 		$date = date('Y-m-d');
 		$created_by = $this->session->userdata('admin_id');
         $clock_out = date('H:i:s');
@@ -67,6 +128,9 @@ class Absensi extends Secure_Controller {
         ->get()->row_array();
 		$id = $get_date['id'];
 
+		$this->db->set("lat_out", $lat);
+		$this->db->set("lon_out", $lon);
+		$this->db->set("foto_out", $nama_file_foto);
 		$this->db->set("clock_out", $clock_out);
 		$this->db->where("id", $id);
 		$this->db->update("absensi");

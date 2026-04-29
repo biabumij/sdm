@@ -57,10 +57,30 @@
 									</div>
 								</div>
 								<div class="panel-content">
-									<form method="POST" action="<?php echo site_url('absensi/submit_absensi');?>" id="form-po" enctype="multipart/form-data" autocomplete="off">
+									<form method="POST" action="<?= site_url('absensi/submit_clock_in'); ?>" id="form-po">
+										<input type="hidden" name="lat" id="lat">
+										<input type="hidden" name="lon" id="lon">
+										<div class="text-center" style="margin-bottom: 20px;">
+											<div id="camera_container">
+												<video id="webcam" autoplay playsinline width="300" style="border-radius: 10px; border: 2px solid #ddd;"></video>
+											</div>
+											
+											<div id="preview_container" style="display:none;">
+												<canvas id="canvas" width="300" height="225" style="border-radius: 10px; border: 2px solid #2196f3;"></canvas>
+											</div>
+
+											<br>
+											<button type="button" id="btn-ambil" onclick="snap()" class="btn btn-info" style="margin-top:10px;">
+												<i class="fa fa-camera"></i> Ambil Foto
+											</button>
+											<button type="button" id="btn-ulang" onclick="ulangFoto()" class="btn btn-warning" style="margin-top:10px; display:none;">
+												<i class="fa fa-rotate"></i> Foto Ulang
+											</button>
+
+											<input type="hidden" name="image_data" id="image_data">
+										</div>
 										<div class="text-center">
-											<a href="<?= base_url('absensi/submit_clock_in') ?>" class="btn btn-success" style="width:150px; font-weight:bold; border-radius:10px;">Clock-In</a>
-											<a href="<?= base_url('absensi/submit_clock_out') ?>" class="btn btn-danger" style="width:150px; font-weight:bold; border-radius:10px;">Clock-Out</a>
+											<button type="button" onclick="prosesAbsen('clock_in')" class="btn btn-success" style="width:150px; font-weight:bold; border-radius:10px;">Clock-In</button>
 										</div>
 									</form>
 								</div>
@@ -106,6 +126,87 @@
 				});
 				
 			});
+		</script>
+		<script>
+			const video = document.getElementById('webcam');
+			const canvas = document.getElementById('canvas');
+			const imageDataInput = document.getElementById('image_data');
+			const cameraContainer = document.getElementById('camera_container');
+			const previewContainer = document.getElementById('preview_container');
+			const btnAmbil = document.getElementById('btn-ambil');
+			const btnUlang = document.getElementById('btn-ulang');
+
+			// Aktifkan Kamera saat halaman dimuat
+			navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+				.then(function(stream) {
+					video.srcObject = stream;
+				})
+				.catch(function(err) {
+					alert("Kamera tidak dapat diakses atau izin ditolak.");
+				});
+
+			// Fungsi saat tombol "Ambil Foto" diklik
+			function snap() {
+				const context = canvas.getContext('2d');
+
+				// --- PENGATURAN RESOLUSI ---
+				const lebarTarget = 300; // Tentukan lebar foto yang diinginkan (dalam pixel)
+				const skala = lebarTarget / video.videoWidth;
+				const tinggiTarget = video.videoHeight * skala;
+
+				// Set ukuran internal canvas (ini menentukan ukuran file gambar)
+				canvas.width = lebarTarget;
+				canvas.height = tinggiTarget;
+
+				// Gambar ulang video ke canvas dengan ukuran baru yang sudah disesuaikan
+				context.drawImage(video, 0, 0, lebarTarget, tinggiTarget);
+
+				// Simpan ke input hidden dengan kompresi 0.7 (70% kualitas)
+				const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+				imageDataInput.value = dataUrl;
+
+				// Tukar tampilan kamera dengan hasil foto
+				cameraContainer.style.display = 'none';
+				previewContainer.style.display = 'block';
+				btnAmbil.style.display = 'none';
+				btnUlang.style.display = 'inline-block';
+			}
+
+			// Fungsi jika ingin foto ulang
+			function ulangFoto() {
+				imageDataInput.value = ""; // Kosongkan data lama
+				cameraContainer.style.display = 'block';
+				previewContainer.style.display = 'none';
+				btnAmbil.style.display = 'inline-block';
+				btnUlang.style.display = 'none';
+			}
+
+			// Modifikasi fungsi prosesAbsen lama Anda
+			function prosesAbsen(tipe) {
+				// Cek apakah sudah ambil foto
+				if (imageDataInput.value === "") {
+					bootbox.alert("Silakan ambil foto selfie terlebih dahulu!");
+					return;
+				}
+
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function(position) {
+						document.getElementById('lat').value = position.coords.latitude;
+						document.getElementById('lon').value = position.coords.longitude;
+
+						bootbox.confirm({
+							message: "Kirim absensi sekarang?",
+							callback: function (result) {
+								if(result) {
+									document.getElementById('form-po').submit();
+								}
+							}
+						});
+					}, function() {
+						alert("Gagal mengambil lokasi. Pastikan GPS aktif.");
+					});
+				}
+			}
 		</script>
 	</body>
 </html>
