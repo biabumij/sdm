@@ -18,14 +18,33 @@
 	    <link rel="stylesheet" href="<?php echo base_url();?>assets/back/theme/vendor/animate.css/animate.css">
 	    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/back/theme/stylesheets/css/style.css">
 	    <style type="text/css">
-			label.error{
-	    		position: absolute;
-	    		bottom: -20px;
-	    	}
-			
-			.site {
-				color: #ffffff;
-				font-weight: bold;
+			/* Membuat pembungkus utama menjadi Flexbox */
+			body, html {
+				height: 100%;
+				margin: 0;
+			}
+
+			.wrap {
+				display: flex;
+				align-items: center; /* Tengah Vertikal */
+				justify-content: center; /* Tengah Horizontal */
+				min-height: 100vh;
+				padding: 15px; /* Spasi agar tidak mepet layar di mobile */
+				background: #f5f5f5; /* Atau warna/gambar background Anda */
+			}
+
+			.page-body {
+				width: 100%;
+				max-width: 400px; /* Lebar maksimal kotak login */
+				margin: 0 !important; /* Hapus margin default */
+			}
+
+			.box {
+				background-color: rgba(255, 255, 255, 0.9);
+				border-radius: 15px;
+				padding: 20px;
+				box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+				margin: 0 auto;
 			}
 
 			#togglePassword {
@@ -59,10 +78,9 @@
 					<table width="100%" border="0">
 						<tr>
 							<th width="50%" class="text-center">
-								<img alt="logo" width="50%" src="<?php echo base_url().$this->m_themes->GetThemes('site_logo');?>" />
 								<div class="panel-content-login bg-scale-0">
 									<div class="panel-content-login bg-scale-0">
-										<div class="alert alert-warning" role="alert">
+										<div class="alert alert-info" role="alert">
 											<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 											<div class="alert-content"></div>
 										</div>
@@ -76,11 +94,11 @@
 											<div class="form-group">
 												<span class="input-with-icon">
 													<input type="password" class="form-control-login" id="password" placeholder="Password" name="password">
-													<right><i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i></right>
+													<i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i>
 												</span>
 											</div>
 											<div class="form-group" style="margin:auto; width:auto;">
-												<button type="submit" name="submit" class="btn btn-primary btn-block" data-loading="Please wait..." style="font-size:80%; font-weight:bold; border-radius:10px"><b>LOGIN</b></button>
+												<button type="submit" name="submit" class="btn btn-primary btn-block" data-loading="Please wait..." style="font-size:80%; font-weight:bold; border-radius:10px; height:35px;"><b>LOGIN</b></button>
 											</div>
 											<div class="form-group site text-center" style="font-weight:bold; color:black;">
 												
@@ -89,9 +107,6 @@
 									</div>
 								</div>
 							</th>
-						</tr>
-						<tr>
-							<th colspan="2" class="text-center" style="font-size:90%;">&copy; PT BIA BUMI JAYENDRA, 2025</th>
 						</tr>
 					</table>
 					<!--SIGN IN FORM-->
