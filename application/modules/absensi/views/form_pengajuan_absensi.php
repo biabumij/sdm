@@ -36,6 +36,39 @@
                 background-size: 100%;
                 transition: background 0s;
             }
+
+			/* Membuat form lebih lega di mobile */
+			.panel-content {
+				padding: 20px !important;
+			}
+
+			.form-control {
+				height: 45px; /* Lebih mudah diklik di layar sentuh */
+				border-radius: 8px;
+			}
+
+			label {
+				font-weight: bold;
+				margin-bottom: 5px;
+				display: block;
+				color: #333;
+			}
+
+			/* Memastikan tombol besar di mobile */
+			@media (max-width: 768px) {
+				.btn-lg-mobile {
+					width: 100%;
+					margin-bottom: 10px;
+					padding: 12px;
+				}
+				
+				.col-sm-2, .col-sm-8 {
+					width: 100% !important;
+				}
+			}
+
+			.mb-3 { margin-bottom: 15px; }
+			.mb-4 { margin-bottom: 20px; }
 		</style>
 	</head>
 
@@ -62,7 +95,7 @@
 											<div class="col-sm-2">
 													<label>Tanggal Absensi</label>
 												</div>	
-											<div class="col-sm-1">
+											<div class="col-sm-2">
 												<input type="date" class="form-control" name="date" required="">
 											</div>
 											<br />
@@ -70,7 +103,7 @@
 											<div class="col-sm-2">
 												<label>Clock-In</label>
 											</div>	
-											<div class="col-sm-1">
+											<div class="col-sm-2">
 												<input type="time" class="form-control" name="clock_in" required="">
 											</div>
 											<br />
@@ -78,7 +111,7 @@
 											<div class="col-sm-2">
 												<label>Clock-Out</label>
 											</div>
-											<div class="col-sm-1">
+											<div class="col-sm-2">
 												<input type="time" class="form-control" name="clock_out" required="">
 											</div>
 											<br />
