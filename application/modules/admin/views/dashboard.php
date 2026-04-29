@@ -254,6 +254,14 @@
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
                                     <ul class="row text-center list-inline  wowload bounceIn">
                                         <li style="background: linear-gradient(110deg, #666666 20%, #666666 40%, #666666 80%);">
+                                            <a href="<?php echo site_url('admin/absensi_karyawan_all');?>">
+                                            <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>DATA ABSENSI (PUSAT)</b></span></a>
+                                        </li>
+                                    </ul>
+                                </th>
+                                <th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
+                                    <ul class="row text-center list-inline  wowload bounceIn">
+                                        <li style="background: linear-gradient(110deg, #666666 20%, #666666 40%, #666666 80%);">
                                             <a href="<?php echo site_url('admin/absensi');?>">
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>LAPORAN (PUSAT)</b></span></a>
                                         </li>
@@ -267,6 +275,12 @@
                                         </li>
                                     </ul>
                                 </th>-->
+                                <th width="25%"></th>
+                            </tr>                                    
+                        </table>
+                        <table width="100%">
+                            <tr>
+                                <th width="25%"></th>
                                 <?php
                                 if(in_array($this->session->userdata('admin_group_id'), array(1))){
                                 ?>
@@ -286,7 +300,6 @@
                         </table>
                         <table width="100%">
                             <tr>
-                                <th width="8.5%" class="text-center"></th>
                                 <th width="25%" class="text-center">
                                     <ul class="row text-center list-inline  wowload bounceInUp collapse" id="settings">
                                         <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
