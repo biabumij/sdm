@@ -192,7 +192,7 @@
                                 <th width="25%"></th>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#absensi" aria-expanded="false" aria-controls="absensi">
                                     <ul class="row text-center list-inline  wowload bounceIn">
-                                        <li style="background: linear-gradient(135deg, #004d40, #00897b, #4db6ac);">
+                                        <li style="background: linear-gradient(to right, #32CD32, #228B22, #008200);">
                                             <a href="<?php echo site_url('absensi/form_absensi');?>">
                                             <span style="color:#fffdd0;"><i class="fa-regular fa-clock"></i><b>CLOCK IN</b></span></a>
                                         </li>
