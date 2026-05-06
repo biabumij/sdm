@@ -2,6 +2,24 @@
 <html lang="en" class="fixed">
     <head>
         <style type="text/css">
+            /* Pengaturan untuk PC (Layar Lebar) */
+            .container {
+                width: 80%;
+                margin: 0 auto;
+            }
+
+            /* Pengaturan untuk HP (Layar di bawah 768px) */
+            @media (max-width: 768px) {
+                .container {
+                    width: 100%; /* Agar memenuhi layar HP */
+                    padding: 10px;
+                }
+                
+                /* Sembunyikan elemen yang tidak perlu di HP atau ubah layoutnya */
+                .sidebar {
+                    display: none; 
+                }
+            }
             body {
                 font-family: helvetica;
                 background-color: #ffffff !important;
