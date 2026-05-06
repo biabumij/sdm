@@ -269,7 +269,7 @@
                                 <th width="25%"></th>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
                                     <ul class="row text-center list-inline  wowload bounceIn">
-                                        <li style="background: linear-gradient(to right, #121212, #242424, #323232);">
+                                        <li style="background: linear-gradient(135deg, #050505, #1e1b4b, #000000);">
                                             <a href="<?php echo site_url('admin/absensi');?>">
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>LAPORAN (ALL)</b></span></a>
                                         </li>
