@@ -171,7 +171,7 @@
 			padding: 2px 8px; /* Padding untuk teks label */
 			font-size: 0.85rem;
 			color: #87ceeb; /* Warna teks label */
-			background-color: transparent; /* SAMA DENGAN WARNA BACKGROUND HALAMAN */
+			background-color: rgba(255, 255, 255, 0.9); /* SAMA DENGAN WARNA BACKGROUND HALAMAN */
 			border-radius: 4px;
 			transform: translateY(-50%) translateX(-4px); /* Posisikan label melayang tepat di atas garis */
 			pointer-events: none; /* Biarkan klik menembus label ke input */
