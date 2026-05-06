@@ -83,7 +83,7 @@
 			}
 
 			.form-group {
-				text-align: left; /* Kembalikan label/input ke kiri jika hanya pesan error yang ingin di tengah */
+				text-align: center; /* Kembalikan label/input ke kiri jika hanya pesan error yang ingin di tengah */
 				margin-bottom: 15px;
 				position: relative;
 			}
