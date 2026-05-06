@@ -25,7 +25,8 @@ class Admin extends CI_Controller {
 
 					case 'logout':
 					$this->session->unset_userdata('admin_id');
-					$this->session->unset_userdata('email');
+					$this->session->unset_userdata('admin_email');
+					$this->session->unset_userdata('current_session'); // Tambahkan ini
 			   		// $this->session->sess_destroy();
 			   		redirect('admin');
 					break;

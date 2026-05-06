@@ -1,14 +1,140 @@
 <!doctype html>
 <html lang="en" class="fixed">
     <head>
-        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="erp/assets/bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="erp/assets/animate/animate.css" />
-        <link rel="stylesheet" href="erp/assets/animate/set.css" />
-        <link rel="stylesheet" href="erp/assets/gallery/blueimp-gallery.min.css">
-        <link rel="stylesheet" href="erp/assets/style.css">
+        <style type="text/css">
+            body {
+                font-family: helvetica;
+                background-color: #ffffff !important;
+            }
+
+            a:hover {
+                color: white;
+            }
+
+            th, td {
+                padding: 15px;
+            }
+
+            .chart-container{
+                position: relative; max-width: 100%; height:350px; background: #fff;
+            }
+
+            .highcharts-figure,
+            .highcharts-data-table table {
+            min-width: 65%;
+            max-width: 100%;
+            }
+
+            .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #ebebeb;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            }
+
+            .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+            }
+
+            .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+            }
+
+            .highcharts-data-table td,
+            .highcharts-data-table th,
+            .highcharts-data-table caption {
+            padding: 0.5em;
+            }
+
+            .highcharts-data-table thead tr,
+            .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+            }
+
+            .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+            }
+
+            blink {
+            -webkit-animation: 2s linear infinite kedip; /* for Safari 4.0 - 8.0 */
+            animation: 2s linear infinite kedip;
+            }
+            /* for Safari 4.0 - 8.0 */
+            @-webkit-keyframes kedip { 
+            0% {
+                visibility: hidden;
+            }
+            50% {
+                visibility: hidden;
+            }
+            100% {
+                visibility: visible;
+            }
+            }
+            @keyframes kedip {
+            0% {
+                visibility: hidden;
+            }
+            50% {
+                visibility: hidden;
+            }
+            100% {
+                visibility: visible;
+            }
+            }
+
+            /* Animation */
+            @keyframes Gradient{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+            #flippy{text-align:center;margin:auto;display:inline}#flippy button{border-color:rgba(0,0,0,0.0);background:#fff;background-image:linear-gradient(to right,#0b5394 0%,#333333 51%,#0b5394 100%);background-size:200% auto;color:#fff;display:block;width:80%;padding:15px;font-weight:700;font-size:14px;text-align:center;text-transform:uppercase;letter-spacing:0.5px;margin:10px auto;border-radius:10px;box-shadow:0 2px 3px rgba(0,0,0,0.06),0 2px 3px rgba(0,0,0,0.1);transition:all .3s}#flippy button:hover,#flippy button:focus{background-position: right center;outline:none;opacity:1;color:#fff}#flippanel{display:none;padding:10px 0;text-align:left;background:#fff;margin:10px 0 0 0}#flippanel img{background:#f5f5f5;margin:10px auto}
+
+            /* Animation */
+            @keyframes Gradient{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+            #flippy_menu{text-align:center;margin:auto;display:inline}#flippy_menu button{border-color:rgba(0,0,0,0.0);background:#fff;background-image:linear-gradient(to right,#0b5394 0%,#333333 51%,#0b5394 100%);background-size:200% auto;color:#fff;display:block;width:80%;padding:15px;font-weight:700;font-size:14px;text-align:center;text-transform:uppercase;letter-spacing:0.5px;margin:10px auto;border-radius:10px;box-shadow:0 2px 3px rgba(0,0,0,0.06),0 2px 3px rgba(0,0,0,0.1);transition:all .3s}#flippy_menu button:hover,#flippy_menu button:focus{background-position: right center;outline:none;opacity:1;color:#fff}#flippanel{display:none;padding:10px 0;text-align:left;background:#fff;margin:10px 0 0 0}#flippanel img{background:#f5f5f5;margin:10px auto}
+        
+            button {
+                border: none;
+                border-radius: 5px;
+                padding: 5px;
+                font-size: 12px;
+                text-transform: uppercase;
+                cursor: pointer;
+                color: white;
+                background-color: none;
+                box-shadow: 0 0 4px #999;
+                outline: none;
+            }
+
+            .ripple {
+                background-position: center;
+                transition: background 0.8s;
+            }
+            .ripple:hover {
+                background: #eeeeee radial-gradient(circle, transparent 1%, #eeeeee 1%) center/15000%;
+            }
+            .ripple:active {
+                background-color: #e1e1e1;
+                background-size: 100%;
+                transition: background 0s;
+            }
+        </style>
+        <!-- 1. Fonts & Icons (HTTPS) -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/591a1bf2f6.js" crossorigin="anonymous"></script>
+
+        <!-- 2. CSS Utama (Load Bootstrap TERLEBIH DAHULU) -->
+        <link rel="stylesheet" href="<?php echo base_url('erp/assets/bootstrap/css/bootstrap.min.css'); ?>" />
+        <link rel="stylesheet" href="<?php echo base_url('erp/assets/animate/animate.css'); ?>" />
+        <link rel="stylesheet" href="<?php echo base_url('erp/assets/animate/set.css'); ?>" />
+        <link rel="stylesheet" href="<?php echo base_url('erp/assets/gallery/blueimp-gallery.min.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('erp/assets/style.css'); ?>" />
+
         <?php echo $this->Templates->Header();?>
         <script type = "text/JavaScript">
             function AutoRefresh( t ) {
@@ -16,128 +142,6 @@
             }
         </script>
     </head>
-    <style type="text/css">
-        body {
-            font-family: helvetica;
-            background-color: #ffffff !important;
-        }
-
-        a:hover {
-            color: white;
-        }
-
-        th, td {
-            padding: 15px;
-        }
-
-        .chart-container{
-            position: relative; max-width: 100%; height:350px; background: #fff;
-        }
-
-        .highcharts-figure,
-        .highcharts-data-table table {
-        min-width: 65%;
-        max-width: 100%;
-        }
-
-        .highcharts-data-table table {
-        font-family: Verdana, sans-serif;
-        border-collapse: collapse;
-        border: 1px solid #ebebeb;
-        margin: 10px auto;
-        text-align: center;
-        width: 100%;
-        max-width: 500px;
-        }
-
-        .highcharts-data-table caption {
-        padding: 1em 0;
-        font-size: 1.2em;
-        color: #555;
-        }
-
-        .highcharts-data-table th {
-        font-weight: 600;
-        padding: 0.5em;
-        }
-
-        .highcharts-data-table td,
-        .highcharts-data-table th,
-        .highcharts-data-table caption {
-        padding: 0.5em;
-        }
-
-        .highcharts-data-table thead tr,
-        .highcharts-data-table tr:nth-child(even) {
-        background: #f8f8f8;
-        }
-
-        .highcharts-data-table tr:hover {
-        background: #f1f7ff;
-        }
-
-        blink {
-        -webkit-animation: 2s linear infinite kedip; /* for Safari 4.0 - 8.0 */
-        animation: 2s linear infinite kedip;
-        }
-        /* for Safari 4.0 - 8.0 */
-        @-webkit-keyframes kedip { 
-        0% {
-            visibility: hidden;
-        }
-        50% {
-            visibility: hidden;
-        }
-        100% {
-            visibility: visible;
-        }
-        }
-        @keyframes kedip {
-        0% {
-            visibility: hidden;
-        }
-        50% {
-            visibility: hidden;
-        }
-        100% {
-            visibility: visible;
-        }
-        }
-
-        /* Animation */
-        @keyframes Gradient{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
-        #flippy{text-align:center;margin:auto;display:inline}#flippy button{border-color:rgba(0,0,0,0.0);background:#fff;background-image:linear-gradient(to right,#0b5394 0%,#333333 51%,#0b5394 100%);background-size:200% auto;color:#fff;display:block;width:80%;padding:15px;font-weight:700;font-size:14px;text-align:center;text-transform:uppercase;letter-spacing:0.5px;margin:10px auto;border-radius:10px;box-shadow:0 2px 3px rgba(0,0,0,0.06),0 2px 3px rgba(0,0,0,0.1);transition:all .3s}#flippy button:hover,#flippy button:focus{background-position: right center;outline:none;opacity:1;color:#fff}#flippanel{display:none;padding:10px 0;text-align:left;background:#fff;margin:10px 0 0 0}#flippanel img{background:#f5f5f5;margin:10px auto}
-
-        /* Animation */
-        @keyframes Gradient{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
-        #flippy_menu{text-align:center;margin:auto;display:inline}#flippy_menu button{border-color:rgba(0,0,0,0.0);background:#fff;background-image:linear-gradient(to right,#0b5394 0%,#333333 51%,#0b5394 100%);background-size:200% auto;color:#fff;display:block;width:80%;padding:15px;font-weight:700;font-size:14px;text-align:center;text-transform:uppercase;letter-spacing:0.5px;margin:10px auto;border-radius:10px;box-shadow:0 2px 3px rgba(0,0,0,0.06),0 2px 3px rgba(0,0,0,0.1);transition:all .3s}#flippy_menu button:hover,#flippy_menu button:focus{background-position: right center;outline:none;opacity:1;color:#fff}#flippanel{display:none;padding:10px 0;text-align:left;background:#fff;margin:10px 0 0 0}#flippanel img{background:#f5f5f5;margin:10px auto}
-    
-        button {
-			border: none;
-			border-radius: 5px;
-			padding: 5px;
-			font-size: 12px;
-			text-transform: uppercase;
-			cursor: pointer;
-			color: white;
-			background-color: none;
-			box-shadow: 0 0 4px #999;
-			outline: none;
-		}
-
-		.ripple {
-			background-position: center;
-			transition: background 0.8s;
-		}
-		.ripple:hover {
-			background: #eeeeee radial-gradient(circle, transparent 1%, #eeeeee 1%) center/15000%;
-		}
-		.ripple:active {
-			background-color: #e1e1e1;
-			background-size: 100%;
-			transition: background 0s;
-		}
-    </style>
     <body onload = "JavaScript:AutoRefresh(360000);">
     <body>
         <div class="wrap-dashboard">

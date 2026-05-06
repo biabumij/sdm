@@ -8,25 +8,53 @@ class M_admin extends CI_Model {
         parent::__construct();
     }
 
-    function ProcessLogin($email,$password)
+    function ProcessLogin($email, $password)
     {
-    	if(!empty($email) && !empty($password)){
+        if(!empty($email) && !empty($password)){
             $this->db->select("*");
-            $this->db->where('admin_email',$email);
-            $this->db->where('admin_password',$password);
-            $this->db->where('status',1);
+            $this->db->where('admin_email', $email);
+            $this->db->where('admin_password', $password); // Disarankan gunakan password_verify jika sudah di-hash
+            $this->db->where('status', 1);
             $this->db->limit(1);
-            $query=$this->db->get('tbl_admin');
+            $query = $this->db->get('tbl_admin');
+
             if($query->num_rows() > 0){
-                $row=$query->row();
+                $row = $query->row();
                 $admin_id = $row->admin_id;
-                $session_data = array('admin_id'=>$admin_id,'admin_email'=>$email,'admin_name'=>$row->admin_name,'admin_group_id'=>$row->admin_group_id);
+                $current_session_id = session_id(); // Ambil ID session saat ini
+
+                // --- PROSES UPDATE/REPLACE KE TABEL admin_login_status ---
+                // REPLACE INTO akan mengupdate jika admin_id sudah ada, atau insert jika belum ada
+                $data_login_status = array(
+                    'admin_id' => $admin_id,
+                    'last_session_id' => $current_session_id
+                );
+                
+                // Cek apakah data sudah ada
+                $check_status = $this->db->get_where('admin_login_status', array('admin_id' => $admin_id));
+                if ($check_status->num_rows() > 0) {
+                    $this->db->where('admin_id', $admin_id);
+                    $this->db->update('admin_login_status', $data_login_status);
+                } else {
+                    $this->db->insert('admin_login_status', $data_login_status);
+                }
+                // ---------------------------------------------------------
+
+                // Set session data lengkap
+                $session_data = array(
+                    'admin_id'          => $admin_id,
+                    'admin_email'       => $email,
+                    'admin_name'        => $row->admin_name,
+                    'admin_group_id'    => $row->admin_group_id,
+                    'my_session_id'     => $current_session_id // Simpan ID ini untuk pengecekan nanti
+                );
+                
                 $this->session->set_userdata($session_data);
                 return true;
-            }else {
+            } else {
                 return false;
             }
-        }else {
+        } else {
             return false;
         }
     }
@@ -35,16 +63,25 @@ class M_admin extends CI_Model {
     function check_login()
     {
         $sess_admin_id = $this->session->userdata('admin_id');
-        $sess_email = $this->session->userdata('admin_email');
+        $my_session_id = $this->session->userdata('my_session_id');
 
-        if(!empty($sess_admin_id) && !empty($sess_email)){
-            return true;
-        }else {
-            if (!empty($_SERVER['QUERY_STRING'])) {
-                $uri = uri_string() . '?' . $_SERVER['QUERY_STRING'];
-            } else {
-                $uri = uri_string();
+        if(!empty($sess_admin_id)){
+            
+            // Ambil session ID yang terdaftar di database untuk admin ini
+            $this->db->where('admin_id', $sess_admin_id);
+            $status = $this->db->get('admin_login_status')->row();
+
+            // Jika ID session di database berbeda dengan ID session di browser user saat ini
+            if($status && $status->last_session_id !== $my_session_id){
+                // Artinya ada orang lain yang login dengan akun ini
+                $this->session->sess_destroy();
+                return false;
             }
+
+            return true;
+        } else {
+            // Logika redirect...
+            $uri = (!empty($_SERVER['QUERY_STRING'])) ? uri_string() . '?' . $_SERVER['QUERY_STRING'] : uri_string();
             $this->session->set_userdata('redirect', $uri);
             return false;
         }
