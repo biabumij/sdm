@@ -68,6 +68,12 @@
 				width: 20px; /* Batasi lebar ikon agar tidak menutupi seluruh kolom */
 			}
 
+			/* Efek saat ikon ditekan/hover */
+			#togglePassword:hover {
+				color: #0056b3;
+				transform: translateY(-50%) scale(1.1); /* Sedikit membesar saat disentuh */
+			}
+
 			.form-control {
 				height: 40px;
 				padding-left: 10px !important;
