@@ -26,30 +26,17 @@
 
 			.wrap {
 				display: flex;
-				align-items: center; 
-				justify-content: center;
+				align-items: center; /* Tengah Vertikal */
+				justify-content: center; /* Tengah Horizontal */
 				min-height: 100vh;
-				width: 100%; /* Pastikan wrap mengambil lebar penuh */
-				padding: 20px;
-				background: #f5f5f5;
-				box-sizing: border-box;
+				padding: 15px; /* Spasi agar tidak mepet layar di mobile */
+				background: #f5f5f5; /* Atau warna/gambar background Anda */
 			}
 
 			.page-body {
 				width: 100%;
-				max-width: 400px;
-				display: block; /* Memastikan isi di dalamnya mengikuti alur blok */
-			}
-
-			/* CSS Khusus untuk memindahkan pesan error jQuery Validate ke tengah */
-			label.error {
-				display: block;
-				width: 100%;
-				text-align: right; /* Ini yang akan menggeser tulisan ke tengah */
-				color: #d9534f;
-				font-size: 12px;
-				margin-top: 5px;
-				font-weight: normal;
+				max-width: 400px; /* Lebar maksimal kotak login */
+				margin: 0 !important; /* Hapus margin default */
 			}
 
 			.box {
@@ -107,7 +94,7 @@
 											<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 											<div class="alert-content"></div>
 										</div>
-										<form id="loginform" action="<?php echo site_url('login_admin');?>">
+										<form id="loginform" action="<?php echo site_url('login_admin');?>" novalidate>
 											<h2>Login</h2>
 											<div class="form-group" style="margin-top:15px;">
 												<span class="input-with-icon">
@@ -222,6 +209,21 @@
 			$(this).removeClass("fa-eye-slash").addClass("fa-eye");
 			}
 			});
+		});
+
+		$("#loginform").validate({
+			rules: {
+				email: { required: true, email: true },
+				password: { required: true, minlength: 6 }
+			},
+			// Tambahkan bagian ini:
+			errorPlacement: function(error, element) {
+				// Menempatkan pesan error di bawah pembungkus input-with-icon
+				error.insertAfter(element.closest('.input-with-icon'));
+			},
+			submitHandler: function(form) {
+				// ... kode ajax Anda ...
+			}
 		});
 		</script>
 	</body>
