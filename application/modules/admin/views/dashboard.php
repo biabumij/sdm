@@ -192,7 +192,7 @@
                                 <th width="25%"></th>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#absensi" aria-expanded="false" aria-controls="absensi">
                                     <ul class="row text-center list-inline  wowload bounceIn">
-                                        <li style="background: linear-gradient(110deg, #00B300 20%, #00B300 40%, #00B300 80%);">
+                                        <li style="background: linear-gradient(135deg, #004d40, #00897b, #4db6ac);">
                                             <a href="<?php echo site_url('absensi/form_absensi');?>">
                                             <span style="color:#fffdd0;"><i class="fa-regular fa-clock"></i><b>CLOCK IN</b></span></a>
                                         </li>
@@ -200,7 +200,7 @@
                                 </th>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#absensi" aria-expanded="false" aria-controls="absensi">
                                     <ul class="row text-center list-inline  wowload bounceIn">
-                                        <li style="background: linear-gradient(110deg, #cc0000 20%, #cc0000 40%, #cc0000 80%);">
+                                        <li style="background: linear-gradient(to right, #800000, #ff0000, #4d0000);">
                                             <a href="<?php echo site_url('absensi/form_absensi_out');?>">
                                             <span style="color:#fffdd0;"><i class="fa-regular fa-clock"></i><b>CLOCK OUT</b></span></a>
                                         </li>
@@ -225,7 +225,7 @@
                                 <th width="25%"></th>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#pengajuan" aria-expanded="false" aria-controls="pengajuan">
                                     <ul class="row text-center list-inline  wowload bounceIn">
-                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                        <li style="background: linear-gradient(to right, #1b3022, #39572c, #4e6e3e);">
                                             <a href="<?php echo site_url('absensi/form_pengajuan_absensi');?>">
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-screwdriver-wrench"></i><b>LUPA ABSENSI</b></span></a>
                                         </li>
@@ -233,7 +233,7 @@
                                 </th>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
                                     <ul class="row text-center list-inline  wowload bounceIn">
-                                        <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
+                                        <li style="background: linear-gradient(to right, #240b36, #003366, #0052D4);">
                                             <a href="<?php echo site_url('admin/absensi_karyawan');?>">
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>DATA ABSENSI</b></span></a>
                                         </li>
