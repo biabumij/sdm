@@ -77,6 +77,16 @@
 			#togglePassword {
 				pointer-events: auto; /* Pastikan ikon bisa diklik */
 			}
+
+			#loginform {
+				text-align: center;
+			}
+
+			.form-group {
+				text-align: left; /* Kembalikan label/input ke kiri jika hanya pesan error yang ingin di tengah */
+				margin-bottom: 15px;
+				position: relative;
+			}
 	    	<?php include "assets/back/theme/stylesheets/css/style.css" ?>
 	    </style>
 	</head>
