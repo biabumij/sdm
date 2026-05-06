@@ -186,32 +186,5 @@
         <script src="<?php echo base_url(); ?>assets/back/theme/vendor/daterangepicker/moment.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/back/theme/vendor/daterangepicker/daterangepicker.js"></script>
         <script src="https://kit.fontawesome.com/591a1bf2f6.js" crossorigin="anonymous"></script>
-
-		<script type="text/javascript">
-			$('#form-po').submit(function(e){
-				e.preventDefault();
-				var currentForm = this;
-				bootbox.confirm({
-					message: "Apakah anda yakin clock-in sekarang ?",
-					buttons: {
-						confirm: {
-							label: 'Yes',
-							className: 'btn-success'
-						},
-						cancel: {
-							label: 'No',
-							className: 'btn-danger'
-						}
-					},
-					callback: function (result) {
-						if(result){
-							currentForm.submit();
-						}
-						
-					}
-				});
-				
-			});
-		</script>
 	</body>
 </html>

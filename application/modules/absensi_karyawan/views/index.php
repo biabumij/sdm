@@ -230,7 +230,7 @@
             });
             
             /*ABSENSI*/
-            var table_absensi = $('#table_absensi').DataTable( {"bAutoWidth": false,
+            var table_absensi = $('#table_absensi').DataTable( {"bAutoWidth": false, "searching": false,
                 ajax: {
                     processing: true,
                     serverSide: true,
@@ -298,7 +298,7 @@
             }
 
             /*PENGAJUAN ABSENSI*/
-            var table_pengajuan_absensi = $('#table_pengajuan_absensi').DataTable( {"bAutoWidth": false,
+            var table_pengajuan_absensi = $('#table_pengajuan_absensi').DataTable( {"bAutoWidth": false, "searching": false,
                 ajax: {
                     processing: true,
                     serverSide: true,
@@ -349,7 +349,7 @@
             });
 
             /*CUTI*/
-            var table_cuti = $('#table_cuti').DataTable( {"bAutoWidth": false,
+            var table_cuti = $('#table_cuti').DataTable( {"bAutoWidth": false, "searching": false,
                 ajax: {
                     processing: true,
                     serverSide: true,
@@ -390,7 +390,7 @@
             });
 
             /*DATA PEGAWAI*/
-            var table_pegawai = $('#table_pegawai').DataTable( {"bAutoWidth": false,
+            var table_pegawai = $('#table_pegawai').DataTable( {"bAutoWidth": false, "searching": false,
                 ajax: {
                     processing: true,
                     serverSide: true,
