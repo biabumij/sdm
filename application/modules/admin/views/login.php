@@ -42,7 +42,7 @@
 			.box {
 				background-color: rgba(255, 255, 255, 0.9);
 				border-radius: 15px;
-				padding: 20px;
+				padding: 0px;
 				box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 				margin: 0 auto;
 			}
@@ -76,16 +76,6 @@
 
 			#togglePassword {
 				pointer-events: auto; /* Pastikan ikon bisa diklik */
-			}
-
-			#loginform {
-				text-align: center;
-			}
-
-			.form-group {
-				text-align: center; /* Kembalikan label/input ke kiri jika hanya pesan error yang ingin di tengah */
-				margin-bottom: 15px;
-				position: relative;
 			}
 	    	<?php include "assets/back/theme/stylesheets/css/style.css" ?>
 	    </style>
