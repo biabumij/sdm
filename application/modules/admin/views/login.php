@@ -45,7 +45,7 @@
 			label.error {
 				display: block;
 				width: 100%;
-				text-align: center; /* Ini yang akan menggeser tulisan ke tengah */
+				text-align: right; /* Ini yang akan menggeser tulisan ke tengah */
 				color: #d9534f;
 				font-size: 12px;
 				margin-top: 5px;
