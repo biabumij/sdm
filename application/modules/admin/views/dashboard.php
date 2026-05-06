@@ -253,7 +253,7 @@
                                 <th width="25%"></th>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
                                     <ul class="row text-center list-inline  wowload bounceIn">
-                                        <li style="background: linear-gradient(110deg, #666666 20%, #666666 40%, #666666 80%);">
+                                        <li style="background: linear-gradient(to right, #121212, #242424, #323232);">
                                             <a href="<?php echo site_url('admin/absensi');?>">
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-file-lines"></i><b>LAPORAN (ALL)</b></span></a>
                                         </li>
@@ -278,7 +278,7 @@
                                 ?>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#settings" aria-expanded="false" aria-controls="beton">
                                     <ul class="row text-center list-inline  wowload bounceIn">
-                                        <li style="background: linear-gradient(110deg, #000000 20%, #000000 40%, #000000 80%);">
+                                        <li style="background: linear-gradient(135deg, #050505, #1e1b4b, #000000);">
                                             <a>
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-gear"></i><b>SETTINGS</b></span></a>
                                         </li>
@@ -294,15 +294,15 @@
                             <tr>
                                 <th width="25%" class="text-center">
                                     <ul class="row text-center list-inline  wowload bounceInUp collapse" id="settings">
-                                        <li style="background: linear-gradient(110deg, #000000 20%, #000000 40%, #000000 80%);">
+                                        <li style="background: linear-gradient(135deg, #050505, #1e1b4b, #000000);">
                                             <a href="<?php echo site_url('admin/menu');?>">
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-bars"></i><b>MENU</b></span></a>
                                         </li>
-                                        <li style="background: linear-gradient(110deg, #000000 20%, #000000 40%, #000000 80%);">
+                                        <li style="background: linear-gradient(135deg, #050505, #1e1b4b, #000000);">
                                             <a href="<?php echo site_url('admin/admin_access');?>">
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-eye"></i><b>ADMIN<br />ACCESS</b></span></a>
                                         </li>
-                                        <li style="background: linear-gradient(110deg, #000000 20%, #000000 40%, #000000 80%);">
+                                        <li style="background: linear-gradient(135deg, #050505, #1e1b4b, #000000);">
                                             <a href="<?php echo site_url('admin/admin');?>">
                                             <span style="color:#fffdd0;"><i class="fa-solid fa-user-secret"></i><b>ADMIN</b></span></a>
                                         </li>
