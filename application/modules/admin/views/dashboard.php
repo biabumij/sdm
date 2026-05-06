@@ -2,24 +2,6 @@
 <html lang="en" class="fixed">
     <head>
         <style type="text/css">
-            /* Pengaturan untuk PC (Layar Lebar) */
-            .container {
-                width: 80%;
-                margin: 0 auto;
-            }
-
-            /* Pengaturan untuk HP (Layar di bawah 768px) */
-            @media (max-width: 768px) {
-                .container {
-                    width: 100%; /* Agar memenuhi layar HP */
-                    padding: 10px;
-                }
-                
-                /* Sembunyikan elemen yang tidak perlu di HP atau ubah layoutnya */
-                .sidebar {
-                    display: none; 
-                }
-            }
             body {
                 font-family: helvetica;
                 background-color: #ffffff !important;
@@ -140,6 +122,16 @@
                 background-size: 100%;
                 transition: background 0s;
             }
+
+            /* Membuat form lebih lega di mobile */
+			.panel-content {
+				padding: 20px !important;
+			}
+
+			.form-control {
+				height: 45px; /* Lebih mudah diklik di layar sentuh */
+				border-radius: 8px;
+			}
         </style>
         <!-- 1. Fonts & Icons (HTTPS) -->
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
