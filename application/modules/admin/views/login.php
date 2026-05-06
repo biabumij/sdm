@@ -26,17 +26,30 @@
 
 			.wrap {
 				display: flex;
-				align-items: center; /* Tengah Vertikal */
-				justify-content: center; /* Tengah Horizontal */
+				align-items: center; 
+				justify-content: center;
 				min-height: 100vh;
-				padding: 15px; /* Spasi agar tidak mepet layar di mobile */
-				background: #f5f5f5; /* Atau warna/gambar background Anda */
+				width: 100%; /* Pastikan wrap mengambil lebar penuh */
+				padding: 20px;
+				background: #f5f5f5;
+				box-sizing: border-box;
 			}
 
 			.page-body {
 				width: 100%;
-				max-width: 400px; /* Lebar maksimal kotak login */
-				margin: 0 !important; /* Hapus margin default */
+				max-width: 400px;
+				display: block; /* Memastikan isi di dalamnya mengikuti alur blok */
+			}
+
+			/* CSS Khusus untuk memindahkan pesan error jQuery Validate ke tengah */
+			label.error {
+				display: none;
+				width: 100%;
+				text-align: center; /* Ini yang akan menggeser tulisan ke tengah */
+				color: #d9534f;
+				font-size: 12px;
+				margin-top: 5px;
+				font-weight: normal;
 			}
 
 			.box {
