@@ -203,7 +203,7 @@
                     <div class="process">
                         <table width="100%" style="margin-top:100px;">
                             <tr>
-                                <th width="25%"></th>
+                                <th width="22%"></th>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#absensi" aria-expanded="false" aria-controls="absensi">
                                     <ul class="row text-center list-inline  wowload bounceIn">
                                         <li style="background: linear-gradient(to right, #228B22, #32CD32, #228B22);">
@@ -212,6 +212,7 @@
                                         </li>
                                     </ul>
                                 </th>
+                                <th width="6%"></th>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#absensi" aria-expanded="false" aria-controls="absensi">
                                     <ul class="row text-center list-inline  wowload bounceIn">
                                         <li style="background: linear-gradient(to right, #800000, #ff0000, #800000);">
@@ -220,7 +221,7 @@
                                         </li>
                                     </ul>
                                 </th>
-                                <th width="25%"></th>
+                                <th width="22%"></th>
                                 <!--<th width="25%" class="text-center" data-toggle="collapse" data-target="#cuti" aria-expanded="false" aria-controls="cuti">
                                     <ul class="row text-center list-inline  wowload bounceIn">
                                         <li style="background: linear-gradient(110deg, #0B5394 20%, #23649e 40%, #0B5394 80%);">
@@ -236,7 +237,7 @@
                     <div class="process">
                         <table width="100%">
                             <tr>
-                                <th width="25%"></th>
+                                <th width="22%"></th>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#pengajuan" aria-expanded="false" aria-controls="pengajuan">
                                     <ul class="row text-center list-inline  wowload bounceIn">
                                         <li style="background: linear-gradient(to right, #121212, #242424, #323232);">
@@ -245,6 +246,7 @@
                                         </li>
                                     </ul>
                                 </th>
+                                <th width="6%"></th>
                                 <th width="25%" class="text-center" data-toggle="collapse" data-target="#data" aria-expanded="false" aria-controls="sdm">
                                     <ul class="row text-center list-inline  wowload bounceIn">
                                         <li style="background: linear-gradient(to right, #121212, #242424, #323232);">
@@ -253,7 +255,7 @@
                                         </li>
                                     </ul>
                                 </th>
-                                <th width="25%"></th>
+                                <th width="22%"></th>
                             </tr>                                    
                         </table>
                     </div>
