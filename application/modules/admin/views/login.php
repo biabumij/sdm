@@ -75,7 +75,7 @@
 			}
 
 			.form-control {
-				height: 40px;
+				height: 45px;
 				padding-left: 10px !important;
 				width: 100%;
 				position: relative;
@@ -96,7 +96,7 @@
 			}
 
 			.form-control-login {
-				height: 50px;
+				height: 45px;
 				width: 100%;
 				position: relative;
 				z-index: 1;
@@ -233,7 +233,7 @@
 	<body>
 		<div class="wrap">
 			<div class="page-body animated slideInDown">
-				<div class="box" style="background-color: rgba(255, 255, 255, 0.9); margin-top:10%;">
+				<div class="box" style="background-color: #ffffff; margin-top:10%;">
 					<table width="100%" border="0">
 						<tr>
 							<th width="50%" class="text-center">
