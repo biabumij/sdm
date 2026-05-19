@@ -80,8 +80,7 @@
 		<br /><br />
 		<table cellpadding="3" width="98%">
 			<tr class="table-active">
-				<th align="center" width="10%">NIP</th>
-				<th align="center" width="20%">Nama</th>
+				<th align="center" width="30%">Nama</th>
 				<th align="center" width="10%">Posisi</th>
 				<th align="center" width="10%">Tanggal</th>
 				<th align="center" width="10%">Organisasi</th>
@@ -92,7 +91,6 @@
             </tr>
 			<?php foreach ($data as $key => $x): ?>
 			<tr>
-				<td align="center"><?= $this->crud_global->GetField('tbl_admin',array('admin_id'=>$x['nama_pegawai']),'nip'); ?></td>
 				<td align="center"><?= $this->crud_global->GetField('tbl_admin',array('admin_id'=>$x['nama_pegawai']),'admin_name'); ?></td>
 				
 				<?php
