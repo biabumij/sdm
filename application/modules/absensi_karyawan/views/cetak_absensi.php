@@ -80,8 +80,8 @@
 		<br /><br />
 		<table cellpadding="3" width="98%">
 			<tr class="table-active">
-				<th align="center" width="30%">Nama</th>
-				<th align="center" width="10%">Posisi</th>
+				<th align="center" width="20%">Nama</th>
+				<th align="center" width="20%">Posisi</th>
 				<th align="center" width="10%">Tanggal</th>
 				<th align="center" width="10%">Organisasi</th>
 				<th align="center" width="10%">Status Kehadiran</th>
